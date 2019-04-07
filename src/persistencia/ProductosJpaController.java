@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import modelo.Productos;
 import persistencia.exceptions.NonexistentEntityException;
 
@@ -25,8 +26,8 @@ import persistencia.exceptions.NonexistentEntityException;
  */
 public class ProductosJpaController implements Serializable {
 
-    public ProductosJpaController(EntityManagerFactory emf) {
-        this.emf = emf;
+    public ProductosJpaController() {
+        this.emf = Persistence.createEntityManagerFactory("Acabados_DonJorgePU");
     }
     private EntityManagerFactory emf = null;
 

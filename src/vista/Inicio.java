@@ -102,26 +102,25 @@ public class Inicio extends javax.swing.JFrame {
         String passinput;
         
         passinput = JOptionPane.showInputDialog("Ingrese la cntraseña: ");
-        System.out.println(pass);
         if(pass.equals(passinput)){
-           // admin_gestionar ventana_admin_gestionar = new admin_gestionar();
-           // ventana_admin_gestionar.setVisible(true);
-            //this.setVisible(false);
+            admin_gestionar ventana_admin_gestionar = new admin_gestionar();
+            ventana_admin_gestionar.setVisible(true);
+            this.setVisible(false);
         }else{
             JOptionPane.showMessageDialog(null, "La contraseña es incorrecta");
         }
     }//GEN-LAST:event_boton_adminActionPerformed
 
     private void boton_ventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_ventaActionPerformed
-        // venta_facturacion ventana_venta_facturacion = new venta_facturacion();
-        // ventana_venta_facturacion.setVisible(true);
-        //  this.setVisible(false);
+         venta_facturacion ventana_venta_facturacion = new venta_facturacion();
+         ventana_venta_facturacion.setVisible(true);
+         this.setVisible(false);
     }//GEN-LAST:event_boton_ventaActionPerformed
 
     private void boton_fabricaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_fabricaActionPerformed
-        // fabrica_pedidos ventana_fabrica_pedidos = new fabrica_pedidos();
-        // ventana_fabrica_pedidos.setVisible(true);
-        //  this.setVisible(false);
+         fabrica_pedidos ventana_fabrica_pedidos = new fabrica_pedidos();
+         ventana_fabrica_pedidos.setVisible(true);
+         this.setVisible(false);
     }//GEN-LAST:event_boton_fabricaActionPerformed
 
     /**

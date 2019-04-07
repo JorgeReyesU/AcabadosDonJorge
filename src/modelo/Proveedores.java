@@ -38,7 +38,7 @@ public class Proveedores implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "proNIT")
-    private String proNIT;
+    public String proNIT;
     @Column(name = "proNombre")
     private String proNombre;
     @Column(name = "proTelefono")
