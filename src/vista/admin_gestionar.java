@@ -29,8 +29,6 @@ public class admin_gestionar extends javax.swing.JFrame {
 
         bInicio = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        bSMP = new javax.swing.JButton();
-        bSU = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         bCliente = new javax.swing.JButton();
         bProveedor = new javax.swing.JButton();
@@ -51,20 +49,6 @@ public class admin_gestionar extends javax.swing.JFrame {
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
-            }
-        });
-
-        bSMP.setText("SMP");
-        bSMP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bSMPActionPerformed(evt);
-            }
-        });
-
-        bSU.setText("SU");
-        bSU.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bSUActionPerformed(evt);
             }
         });
 
@@ -92,8 +76,6 @@ public class admin_gestionar extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(bSU, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bSMP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(bInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,16 +107,11 @@ public class admin_gestionar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(bSMP, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bSU, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(bCliente)
-                        .addComponent(bProveedor)
-                        .addComponent(bEmpleado)))
+                .addGap(103, 103, 103)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bCliente)
+                    .addComponent(bProveedor)
+                    .addComponent(bEmpleado))
                 .addGap(65, 65, 65)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bProducto)
@@ -160,18 +137,6 @@ public class admin_gestionar extends javax.swing.JFrame {
         ventana.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_bInicioActionPerformed
-
-    private void bSMPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSMPActionPerformed
-        admin_stockMateriaPrima ventana = new admin_stockMateriaPrima();
-        ventana.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_bSMPActionPerformed
-
-    private void bSUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSUActionPerformed
-        admin_stockUtileria ventana = new admin_stockUtileria();
-        ventana.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_bSUActionPerformed
 
     /**
      * @param args the command line arguments
@@ -215,8 +180,6 @@ public class admin_gestionar extends javax.swing.JFrame {
     private javax.swing.JButton bMateriaP;
     private javax.swing.JButton bProducto;
     private javax.swing.JButton bProveedor;
-    private javax.swing.JButton bSMP;
-    private javax.swing.JButton bSU;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables

@@ -51,7 +51,7 @@ public class Empleados implements Serializable {
     @Column(name = "empApellido")
     private String empApellido;
     @Column(name = "empGenero")
-    private Character empGenero;
+    private char empGenero;
     @Column(name = "empFechaNacimiento")
     @Temporal(TemporalType.DATE)
     private Date empFechaNacimiento;

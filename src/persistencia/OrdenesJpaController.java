@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import modelo.Ordenes;
 import persistencia.exceptions.NonexistentEntityException;
 
@@ -25,8 +26,8 @@ import persistencia.exceptions.NonexistentEntityException;
  */
 public class OrdenesJpaController implements Serializable {
 
-    public OrdenesJpaController(EntityManagerFactory emf) {
-        this.emf = emf;
+    public OrdenesJpaController() {
+        this.emf = Persistence.createEntityManagerFactory("Acabados_DonJorgePU");
     }
     private EntityManagerFactory emf = null;
 
