@@ -41,7 +41,7 @@ public class Clientes implements Serializable {
     @Id
     @Basic(optional = false)
     @Column(name = "cliNIT")
-    private String cliNIT;
+    public String cliNIT;
     @Column(name = "cliNombre")
     private String cliNombre;
     @Column(name = "cliApellido")
