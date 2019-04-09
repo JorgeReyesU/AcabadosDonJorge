@@ -28,7 +28,7 @@ import persistencia.exceptions.PreexistingEntityException;
 public class ProveedoresJpaController implements Serializable {
 
     public ProveedoresJpaController() {
-        this.emf = Persistence.createEntityManagerFactory("Acabados_DonJorgePU");
+        this.emf = this.emf = Persistence.createEntityManagerFactory("Acabados_DonJorgePU");
     }
     private EntityManagerFactory emf = null;
 

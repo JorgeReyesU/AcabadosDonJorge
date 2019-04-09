@@ -29,7 +29,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Detallesorden.findAll", query = "SELECT d FROM Detallesorden d")
     , @NamedQuery(name = "Detallesorden.findByDetCodigo", query = "SELECT d FROM Detallesorden d WHERE d.detCodigo = :detCodigo")
-    , @NamedQuery(name = "Detallesorden.findByDetCantidad", query = "SELECT d FROM Detallesorden d WHERE d.detCantidad = :detCantidad")})
+    , @NamedQuery(name = "Detallesorden.findByDetCantidad", query = "SELECT d FROM Detallesorden d WHERE d.detCantidad = :detCantidad")
+    , @NamedQuery(name = "Detallesorden.findByDetDescripcion", query = "SELECT d FROM Detallesorden d WHERE d.detDescripcion = :detDescripcion")})
 public class Detallesorden implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -40,6 +41,8 @@ public class Detallesorden implements Serializable {
     private Integer detCodigo;
     @Column(name = "detCantidad")
     private Integer detCantidad;
+    @Column(name = "detDescripcion")
+    private String detDescripcion;
     @JoinColumn(name = "ordCodigo", referencedColumnName = "ordCodigo")
     @ManyToOne
     private Ordenes ordCodigo;
@@ -68,6 +71,14 @@ public class Detallesorden implements Serializable {
 
     public void setDetCantidad(Integer detCantidad) {
         this.detCantidad = detCantidad;
+    }
+
+    public String getDetDescripcion() {
+        return detDescripcion;
+    }
+
+    public void setDetDescripcion(String detDescripcion) {
+        this.detDescripcion = detDescripcion;
     }
 
     public Ordenes getOrdCodigo() {

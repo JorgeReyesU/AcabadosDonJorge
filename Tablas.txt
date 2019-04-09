@@ -1,0 +1,105 @@
+CREATE TABLE empleados (
+	empDni INT,
+	empNombre VARCHAR(20),
+	empApellido VARCHAR(20),
+	empGenero CHAR,
+	empFechaNacimiento DATE,
+	empFechaContratacion DATE,
+	empSalario INT,
+	empCargo VARCHAR(10),
+	empFechaDespido DATE,
+	PRIMARY KEY (empDni)
+)
+
+CREATE TABLE observaciones (
+	obsCodigo INT AUTO_INCREMENT,
+	empDni INT,
+	obsDescripcion VARCHAR(200),
+	obsFecha DATE,
+	PRIMARY KEY (obsCodigo),
+	CONSTRAINT FK_obs_emp FOREIGN KEY (empDni) REFERENCES empleados(empDni)
+)
+
+CREATE TABLE clientes (
+	cliNIT VARCHAR(20),
+	cliNombre VARCHAR(50),
+	cliApellido VARCHAR(20),
+	cliTelefono VARCHAR(15),
+	cliDireccion VARCHAR(40),
+	cliEmail VARCHAR(30),
+	cliTipoCliente VARCHAR(10),
+	cliDescuento INT,
+	PRIMARY KEY(cliNIT)
+)
+
+CREATE TABLE ordenes(
+	ordCodigo INT AUTO_INCREMENT,
+	ordFechaOrden DATE,
+	ordFechaDespacho DATE,
+	ordFechaPago DATE,
+	ordDireccionEnvio VARCHAR(40),
+	ordTelefonoEnvio VARCHAR(15),
+	ordComentario VARCHAR(50),
+	ordDescuento INT,
+	ordTipoPago VARCHAR(10),
+	cliNIT VARCHAR(20),
+	PRIMARY KEY (ordCodigo),
+	CONSTRAINT FK_ord_cli FOREIGN KEY (cliNIT) REFERENCES clientes(cliNIT)
+)
+
+CREATE TABLE proveedores(
+	proNIT VARCHAR(20),
+	proNombre VARCHAR(50),
+	proTelefono VARCHAR(15),
+	proDireccion VARCHAR(40),
+	proEmail VARCHAR(30),
+	PRIMARY KEY (proNIT)
+)
+
+CREATE TABLE productos(
+	prodCodigo INT AUTO_INCREMENT,
+	prodNombre VARCHAR(20),
+	prodDescripcion VARCHAR(50),
+	prodUnidadMedida VARCHAR(4),
+	prodCantidad INT,
+	prodPrecioComprado INT,
+	prodPrecioVenta INT,
+	proNIT VARCHAR(20),
+	PRIMARY KEY (prodCodigo),
+	CONSTRAINT FK_prod_pro FOREIGN KEY (proNIT) REFERENCES proveedores(proNIT)
+)
+
+CREATE TABLE detallesOrden(
+	detCodigo INT AUTO_INCREMENT,
+	ordCodigo INT,
+	prodCodigo INT,
+	detCantidad INT,
+	PRIMARY KEY (detCodigo),
+	CONSTRAINT FK_det_ord FOREIGN KEY (ordCodigo) REFERENCES ordenes(ordCodigo),
+	CONSTRAINT FK_det_prod FOREIGN KEY (prodCodigo) REFERENCES productos(prodCodigo)	
+)
+
+CREATE TABLE materiasPrimas(
+	matCodigo INT AUTO_INCREMENT,
+	matNombre VARCHAR(20),
+	matDescripcion VARCHAR(50),
+	matUnidadMedida VARCHAR(4),
+	matCatidad INT,
+	matPrecioComprado INT,
+	proNIT VARCHAR(20),
+	PRIMARY KEY (matCodigo),
+	CONSTRAINT FK_mat_pro FOREIGN KEY (proNIT) REFERENCES proveedores(proNIT)
+)
+
+
+
+
+
+
+
+
+
+
+
+
+
