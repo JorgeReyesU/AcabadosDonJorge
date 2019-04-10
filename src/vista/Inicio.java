@@ -9,6 +9,7 @@ import vista.fabrica.fabrica_pedidos;
 import vista.admin.admin_gestionar;
 import vista.venta.venta_facturacion;
 import javax.swing.JOptionPane;
+import vista.fabrica.fabrica_stock_fabrica;
 
 /**
  *
@@ -134,7 +135,7 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_boton_ventaActionPerformed
 
     private void boton_fabricaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_fabricaActionPerformed
-         fabrica_pedidos ventana_fabrica_pedidos = new fabrica_pedidos();
+         fabrica_stock_fabrica ventana_fabrica_pedidos = new fabrica_stock_fabrica();
          ventana_fabrica_pedidos.setVisible(true);
          this.setVisible(false);
     }//GEN-LAST:event_boton_fabricaActionPerformed
