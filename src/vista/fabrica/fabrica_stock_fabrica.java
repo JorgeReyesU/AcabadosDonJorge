@@ -5,6 +5,7 @@
  */
 package vista.fabrica;
 
+import logica.logica_fabrica_stock_fabrica;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -18,6 +19,7 @@ import vista.Inicio;
  */
 public class fabrica_stock_fabrica extends javax.swing.JFrame {
     ProductosJpaController cProductos = new ProductosJpaController();
+    logica_fabrica_stock_fabrica logicaF = new logica_fabrica_stock_fabrica();
     Productos cEdit;
     
     public static int contadorG = 0;
@@ -138,15 +140,16 @@ public class fabrica_stock_fabrica extends javax.swing.JFrame {
             String productoF2 = listP.get(1).getProdNombre();
             int numeroo = tabla.getSelectedRow();
             String Nombree = (String) modelo.getValueAt(numeroo, 1);
-            if(Nombree.equals(productoF1) && (contadorG < 2)){
+            if(Nombree.equals(productoF1) && (contadorG < 3)){
                 cEdit = (Productos) tabla.getValueAt(tabla.getSelectedRow(), 0);
                 int numero = tabla.getSelectedRow();
                 int cantidadS = (int) modelo.getValueAt(numero, 4);
                 //System.out.println(cantidadS);
 
                 cEdit.setProdCantidad(cantidadS + 300);
+                logicaF.reducirMP(0);
                 contadorG++;
-            }else if(Nombree.equals(productoF1) && contadorG > 1){
+            }else if(Nombree.equals(productoF1) && contadorG > 2){
                 JOptionPane.showMessageDialog(null,"ya se agregaron demasiados lotes de graniplas por hoy");
             }
             
@@ -157,7 +160,8 @@ public class fabrica_stock_fabrica extends javax.swing.JFrame {
                 int cantidadS = (int) modelo.getValueAt(numero, 4);
               //  System.out.println(cantidadS);
 
-                cEdit.setProdCantidad(cantidadS + 20);
+                cEdit.setProdCantidad(cantidadS + 60);
+                logicaF.reducirMP(1);
                 contadorP ++;
             }else if(Nombree.equals(productoF2) && contadorP > 2){
                 JOptionPane.showMessageDialog(null,"ya se agregaron demasiados lotes de pintura por hoy");

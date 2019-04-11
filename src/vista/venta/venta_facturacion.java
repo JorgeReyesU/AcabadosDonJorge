@@ -293,35 +293,98 @@ public class venta_facturacion extends javax.swing.JFrame {
     int subtotal = 0;
     int total = 0;
     private void bAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAgregarActionPerformed
-        if(Integer.parseInt(txtCantidad.getText()) > 0 && Integer.parseInt(txtCantidad.getText()) < 2000){
-            try {
-                Object o[] = null;
-                List<Productos> listP = cProductos.findProductosEntities();
-                int contadorw = 0;
-                while (listP.get(contadorw).getProdNombre() != comboProducto.getSelectedItem()) {
-                    contadorw++;
-                }
-                contadorw++;
-                ProductosJpaController sProductos = new ProductosJpaController();
-
-                modelo.addRow(o);
-                modelo.setValueAt(comboProducto.getSelectedItem(), contadorAgregar, 0); //Nombre
-                modelo.setValueAt(comboColor.getSelectedItem(), contadorAgregar, 1); //Color
-                modelo.setValueAt(txtCantidad.getText(), contadorAgregar, 2); //Cantidad
-                modelo.setValueAt(sProductos.findProductos(contadorw).getProdUnidadMedida(), contadorAgregar, 3); //Unidad
-                modelo.setValueAt(sProductos.findProductos(contadorw).getProdPrecioVenta(), contadorAgregar, 4); //Precio
-                modelo.setValueAt((sProductos.findProductos(contadorw).getProdPrecioVenta()) * (Integer.parseInt(txtCantidad.getText())), contadorAgregar, 5); //Precio total          
-            } catch (Exception e) {
-                JOptionPane.showMessageDialog(null, e.getMessage());
-                System.out.println("problema al agregar un producto");
-            }
-
-            subtotalA();
-            total();
-
-            contadorAgregar++;
+        Object o[] = null;
+        List<Productos> listP = cProductos.findProductosEntities();
+        String prodN = (String) comboProducto.getSelectedItem();
+        int contadorw = 0;
+        while (listP.get(contadorw).getProdNombre() != prodN) {
+            contadorw++;
         }
-        
+       // contadorw++;
+
+        int cantidadProducto = listP.get(contadorw).getProdCantidad();
+        int cantidadPedida = Integer.parseInt(txtCantidad.getText());
+        String TipoPro = (String) listP.get(contadorw).getProdDescripcion();
+        String NombrePro = (String) listP.get(contadorw).getProdNombre();
+       // System.out.println(TipoPro + "   " + listP.get(contadorw).getProdNombre());
+        if (Integer.parseInt(txtCantidad.getText()) > 0) {
+            if (TipoPro.equals("nFabricado") && cantidadPedida <= cantidadProducto) {
+                try {
+                    if((cantidadProducto - cantidadPedida) < 100){
+                        // Aqui debe ir observacion al admin
+                    }
+                    contadorw++;
+                    ProductosJpaController sProductos = new ProductosJpaController();
+
+                    modelo.addRow(o);
+                    modelo.setValueAt(comboProducto.getSelectedItem(), contadorAgregar, 0); //Nombre
+                    modelo.setValueAt(comboColor.getSelectedItem(), contadorAgregar, 1); //Color
+                    modelo.setValueAt(txtCantidad.getText(), contadorAgregar, 2); //Cantidad
+                    modelo.setValueAt(sProductos.findProductos(contadorw).getProdUnidadMedida(), contadorAgregar, 3); //Unidad
+                    modelo.setValueAt(sProductos.findProductos(contadorw).getProdPrecioVenta(), contadorAgregar, 4); //Precio
+                    modelo.setValueAt((sProductos.findProductos(contadorw).getProdPrecioVenta()) * (Integer.parseInt(txtCantidad.getText())), contadorAgregar, 5); //Precio total          
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                    System.out.println("problema al agregar un producto");
+                }
+                subtotalA();
+                total();
+                contadorAgregar++;
+            }else if(TipoPro.equals("nFabricado") && cantidadPedida > cantidadProducto){
+                JOptionPane.showMessageDialog(null, "No existe en stock la cantidad solicitada de este producto. \n"
+                + "Solo quedan: " + cantidadProducto + " Unidades");
+            }
+            if(NombrePro.equals("Graniplas") && cantidadPedida <= cantidadProducto) {
+                try {
+                    contadorw++;
+                    ProductosJpaController sProductos = new ProductosJpaController();
+
+                    modelo.addRow(o);
+                    modelo.setValueAt(comboProducto.getSelectedItem(), contadorAgregar, 0); //Nombre
+                    modelo.setValueAt(comboColor.getSelectedItem(), contadorAgregar, 1); //Color
+                    modelo.setValueAt(txtCantidad.getText(), contadorAgregar, 2); //Cantidad
+                    modelo.setValueAt(sProductos.findProductos(contadorw).getProdUnidadMedida(), contadorAgregar, 3); //Unidad
+                    modelo.setValueAt(sProductos.findProductos(contadorw).getProdPrecioVenta(), contadorAgregar, 4); //Precio
+                    modelo.setValueAt((sProductos.findProductos(contadorw).getProdPrecioVenta()) * (Integer.parseInt(txtCantidad.getText())), contadorAgregar, 5); //Precio total          
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                    System.out.println("problema al agregar un producto");
+                }
+                subtotalA();
+                total();
+                contadorAgregar++;
+            }else if(NombrePro.equals("Graniplas") && cantidadPedida > cantidadProducto){
+                JOptionPane.showMessageDialog(null, "La cantidad de Graniplas que intenta solicitar "
+                        + "sobrepasa la cantidad prudente. \n Se aconseja pedir " + cantidadProducto
+                        + " Kg maximo. \n Cuando la orden sea entregada, pedir la cantidad faltante.");
+            }
+            if(NombrePro.equals("Pintura") && cantidadPedida <= cantidadProducto) {
+                try {
+                    contadorw++;
+                    ProductosJpaController sProductos = new ProductosJpaController();
+
+                    modelo.addRow(o);
+                    modelo.setValueAt(comboProducto.getSelectedItem(), contadorAgregar, 0); //Nombre
+                    modelo.setValueAt(comboColor.getSelectedItem(), contadorAgregar, 1); //Color
+                    modelo.setValueAt(txtCantidad.getText(), contadorAgregar, 2); //Cantidad
+                    modelo.setValueAt(sProductos.findProductos(contadorw).getProdUnidadMedida(), contadorAgregar, 3); //Unidad
+                    modelo.setValueAt(sProductos.findProductos(contadorw).getProdPrecioVenta(), contadorAgregar, 4); //Precio
+                    modelo.setValueAt((sProductos.findProductos(contadorw).getProdPrecioVenta()) * (Integer.parseInt(txtCantidad.getText())), contadorAgregar, 5); //Precio total          
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                    System.out.println("problema al agregar un producto");
+                }
+                subtotalA();
+                total();
+                contadorAgregar++;
+            }else if(NombrePro.equals("Pintura") && cantidadPedida > cantidadProducto){
+                JOptionPane.showMessageDialog(null, "La cantidad de Pintura que intenta solicitar "
+                        + "sobrepasa la cantidad prudente. \n Se aconseja pedir " + cantidadProducto
+                        + " Gal maximo. \n Cuando la orden sea entregada, pedir la cantidad faltante.");
+            }     
+        }else{
+            JOptionPane.showMessageDialog(null, "Introduce una cantidad valida para agregar");
+        } 
     }//GEN-LAST:event_bAgregarActionPerformed
     
     public void subtotalA(){
