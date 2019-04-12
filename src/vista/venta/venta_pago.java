@@ -11,6 +11,7 @@ import javax.swing.JOptionPane;
 import modelo.Clientes;
 import modelo.Detallesorden;
 import modelo.Ordenes;
+import persistencia.ClientesJpaController;
 import persistencia.OrdenesJpaController;
 
 /**
@@ -20,6 +21,7 @@ import persistencia.OrdenesJpaController;
 public class venta_pago extends javax.swing.JFrame {
 
     OrdenesJpaController cOrdenes = new OrdenesJpaController();
+    ClientesJpaController cClientes = new ClientesJpaController();
     
     java.util.Date fecha = new Date();
     String strDateFormat = "dd/MM/y";
@@ -27,11 +29,10 @@ public class venta_pago extends javax.swing.JFrame {
     //System.out.println(objSDF.format(fecha));
     String fechaHoy = objSDF.format(fecha);
     
-    venta_facturacion ventanaF = new venta_facturacion();
-    int Descuento = Integer.parseInt(ventanaF.Descuento);
-    String Cliente = ventanaF.NITCliente;
+    
     
     public static Ordenes Orden;
+    public static int ordenN = 0;
     
     /**
      * Creates new form venta_pago
@@ -202,16 +203,19 @@ public class venta_pago extends javax.swing.JFrame {
             c.setOrdComentario("-");  //Comentario sera el indicador si ya se despacho la orden o no
             // En este caso como apenas esta haciendo la orden le damos el varlo "-" para indicar
             // que todavia no se ha hecho
-            c.setOrdDescuento(Descuento);
+            
+         //   venta_facturacion ventanaF = new venta_facturacion();
+          //  int Descuento = Integer.parseInt(ventanaF.Descuento);
+          //  String Cliente = ventanaF.NITCliente;
+            c.setOrdDescuento(venta_facturacion.Descuento);
             c.setOrdTipoPago((String) comboTP.getSelectedItem());
             
-            Clientes clie = new Clientes();
-            clie.cliNIT = Cliente;
-            c.setCliNIT(clie);
+
+           // clie.cliNIT = Cliente;
+            c.setCliNIT(cClientes.findClientes(venta_facturacion.NITCliente));
             
             cOrdenes.create(c);
-            
-            Orden = cOrdenes.findOrdenes(c.getOrdCodigo());
+            ordenN = 1;
             System.out.println("Los datos fueron guardados");
             this.setVisible(false);
         } catch (Exception e) {

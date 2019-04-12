@@ -8,11 +8,14 @@ package vista.venta;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import logica.logica_venta_facturacion;
 import modelo.Clientes;
 import modelo.Detallesorden;
 import modelo.Productos;
+import modelo.Ordenes;
 import persistencia.ClientesJpaController;
 import persistencia.DetallesordenJpaController;
+import persistencia.OrdenesJpaController;
 import persistencia.ProductosJpaController;
 import vista.Inicio;
 
@@ -25,7 +28,9 @@ public class venta_facturacion extends javax.swing.JFrame {
     ProductosJpaController cProductos = new ProductosJpaController();
     ClientesJpaController cClientes = new ClientesJpaController();
     DetallesordenJpaController cDetalles = new DetallesordenJpaController();
-    
+    OrdenesJpaController cOrdenes = new OrdenesJpaController();
+    public static Ordenes Ordennnn;
+    Productos Prod;
     /**
      * Creates new form venta_facturacion
      */
@@ -290,123 +295,50 @@ public class venta_facturacion extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCantidadActionPerformed
 
     int contadorAgregar = 0;
-    int subtotal = 0;
+    public static int subtotal = 0;
     int total = 0;
     private void bAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAgregarActionPerformed
         Object o[] = null;
         List<Productos> listP = cProductos.findProductosEntities();
-        String prodN = (String) comboProducto.getSelectedItem();
-        int contadorw = 0;
-        while (listP.get(contadorw).getProdNombre() != prodN) {
-            contadorw++;
+        int codigo = 0;
+        String prodNombre = (String) comboProducto.getSelectedItem();
+        for(int i=0; i<listP.size(); i++){
+            if(listP.get(i).getProdNombre() == prodNombre){
+                codigo = listP.get(i).getProdCodigo();
+            }
         }
-       // contadorw++;
-
-        int cantidadProducto = listP.get(contadorw).getProdCantidad();
-        int cantidadPedida = Integer.parseInt(txtCantidad.getText());
-        String TipoPro = (String) listP.get(contadorw).getProdDescripcion();
-        String NombrePro = (String) listP.get(contadorw).getProdNombre();
-       // System.out.println(TipoPro + "   " + listP.get(contadorw).getProdNombre());
-        if (Integer.parseInt(txtCantidad.getText()) > 0) {
-            if (TipoPro.equals("nFabricado") && cantidadPedida <= cantidadProducto) {
-                try {
-                    if((cantidadProducto - cantidadPedida) < 100){
-                        // Aqui debe ir observacion al admin
-                    }
-                    contadorw++;
-                    ProductosJpaController sProductos = new ProductosJpaController();
-
-                    modelo.addRow(o);
-                    modelo.setValueAt(comboProducto.getSelectedItem(), contadorAgregar, 0); //Nombre
-                    modelo.setValueAt(comboColor.getSelectedItem(), contadorAgregar, 1); //Color
-                    modelo.setValueAt(txtCantidad.getText(), contadorAgregar, 2); //Cantidad
-                    modelo.setValueAt(sProductos.findProductos(contadorw).getProdUnidadMedida(), contadorAgregar, 3); //Unidad
-                    modelo.setValueAt(sProductos.findProductos(contadorw).getProdPrecioVenta(), contadorAgregar, 4); //Precio
-                    modelo.setValueAt((sProductos.findProductos(contadorw).getProdPrecioVenta()) * (Integer.parseInt(txtCantidad.getText())), contadorAgregar, 5); //Precio total          
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, e.getMessage());
-                    System.out.println("problema al agregar un producto");
-                }
-                subtotalA();
-                total();
+        String prodColor = (String) comboColor.getSelectedItem();
+        int cantidadP = Integer.parseInt(txtCantidad.getText());
+        String unidad = cProductos.findProductos(codigo).getProdUnidadMedida();
+        int valorU = cProductos.findProductos(codigo).getProdPrecioVenta();
+        int totalP = cantidadP * valorU;
+         
+        int cantidadProd = cProductos.findProductos(codigo).getProdCantidad();
+        if(cantidadP > 0){
+            if(cantidadP <= cantidadProd){
+                logica_venta_facturacion.agregarItemTabla(contadorAgregar, prodNombre, prodColor, cantidadP, unidad, valorU, totalP);
                 contadorAgregar++;
-            }else if(TipoPro.equals("nFabricado") && cantidadPedida > cantidadProducto){
+            }else {
                 JOptionPane.showMessageDialog(null, "No existe en stock la cantidad solicitada de este producto. \n"
-                + "Solo quedan: " + cantidadProducto + " Unidades");
+                + "Solo quedan: " + cantidadProd + " Unidades de " + prodNombre);
             }
-            if(NombrePro.equals("Graniplas") && cantidadPedida <= cantidadProducto) {
-                try {
-                    contadorw++;
-                    ProductosJpaController sProductos = new ProductosJpaController();
-
-                    modelo.addRow(o);
-                    modelo.setValueAt(comboProducto.getSelectedItem(), contadorAgregar, 0); //Nombre
-                    modelo.setValueAt(comboColor.getSelectedItem(), contadorAgregar, 1); //Color
-                    modelo.setValueAt(txtCantidad.getText(), contadorAgregar, 2); //Cantidad
-                    modelo.setValueAt(sProductos.findProductos(contadorw).getProdUnidadMedida(), contadorAgregar, 3); //Unidad
-                    modelo.setValueAt(sProductos.findProductos(contadorw).getProdPrecioVenta(), contadorAgregar, 4); //Precio
-                    modelo.setValueAt((sProductos.findProductos(contadorw).getProdPrecioVenta()) * (Integer.parseInt(txtCantidad.getText())), contadorAgregar, 5); //Precio total          
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, e.getMessage());
-                    System.out.println("problema al agregar un producto");
-                }
-                subtotalA();
-                total();
-                contadorAgregar++;
-            }else if(NombrePro.equals("Graniplas") && cantidadPedida > cantidadProducto){
-                JOptionPane.showMessageDialog(null, "La cantidad de Graniplas que intenta solicitar "
-                        + "sobrepasa la cantidad prudente. \n Se aconseja pedir " + cantidadProducto
-                        + " Kg maximo. \n Cuando la orden sea entregada, pedir la cantidad faltante.");
-            }
-            if(NombrePro.equals("Pintura") && cantidadPedida <= cantidadProducto) {
-                try {
-                    contadorw++;
-                    ProductosJpaController sProductos = new ProductosJpaController();
-
-                    modelo.addRow(o);
-                    modelo.setValueAt(comboProducto.getSelectedItem(), contadorAgregar, 0); //Nombre
-                    modelo.setValueAt(comboColor.getSelectedItem(), contadorAgregar, 1); //Color
-                    modelo.setValueAt(txtCantidad.getText(), contadorAgregar, 2); //Cantidad
-                    modelo.setValueAt(sProductos.findProductos(contadorw).getProdUnidadMedida(), contadorAgregar, 3); //Unidad
-                    modelo.setValueAt(sProductos.findProductos(contadorw).getProdPrecioVenta(), contadorAgregar, 4); //Precio
-                    modelo.setValueAt((sProductos.findProductos(contadorw).getProdPrecioVenta()) * (Integer.parseInt(txtCantidad.getText())), contadorAgregar, 5); //Precio total          
-                } catch (Exception e) {
-                    JOptionPane.showMessageDialog(null, e.getMessage());
-                    System.out.println("problema al agregar un producto");
-                }
-                subtotalA();
-                total();
-                contadorAgregar++;
-            }else if(NombrePro.equals("Pintura") && cantidadPedida > cantidadProducto){
-                JOptionPane.showMessageDialog(null, "La cantidad de Pintura que intenta solicitar "
-                        + "sobrepasa la cantidad prudente. \n Se aconseja pedir " + cantidadProducto
-                        + " Gal maximo. \n Cuando la orden sea entregada, pedir la cantidad faltante.");
-            }     
-        }else{
-            JOptionPane.showMessageDialog(null, "Introduce una cantidad valida para agregar");
-        } 
+        }else {
+            JOptionPane.showMessageDialog(null, "Ingrese una cantidad mayor a 0.");
+        }
+        logica_venta_facturacion.subtotalL(contadorAgregar, totalP); //Subtotal
+        logica_venta_facturacion.totalL();
     }//GEN-LAST:event_bAgregarActionPerformed
-    
-    public void subtotalA(){
-        subtotal = subtotal + (int) modelo.getValueAt(contadorAgregar, 5);    
-        labelSubtotal.setText(String.valueOf(subtotal));
-    }
-    
-    public void total(){
-        total = subtotal - ((Integer.parseInt(labelDescuento.getText()) * subtotal)/100);
-        labelTotal.setText(String.valueOf(total));
-    }
-    
+
     private void bClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bClienteActionPerformed
-        venta_gestionar_clientes ventana = new venta_gestionar_clientes();
-        ventana.setVisible(true);
+         venta_gestionar_clientes ventana = new venta_gestionar_clientes();
+         ventana.setVisible(true);
     }//GEN-LAST:event_bClienteActionPerformed
 
     private void bDescuentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bDescuentoActionPerformed
         ClientesJpaController sClientes = new ClientesJpaController();
         
         labelDescuento.setText(String.valueOf(sClientes.findClientes(String.valueOf(comboClientes.getSelectedItem())).getCliDescuento()));
-        total();
+        logica_venta_facturacion.totalL();
     }//GEN-LAST:event_bDescuentoActionPerformed
 
     private void bEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEliminarActionPerformed
@@ -423,16 +355,16 @@ public class venta_facturacion extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Selecciona un producto para eliminar.");
         }  
         labelSubtotal.setText(String.valueOf(subtotal));
-        total();
+        logica_venta_facturacion.totalL();
     }//GEN-LAST:event_bEliminarActionPerformed
     
-    public static String Descuento = "";
-    public static String NITCliente = "";
+    public static int Descuento;
+    public static String NITCliente;
     private void bPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bPagarActionPerformed
         try{
             if(contadorAgregar > 0){
                 NITCliente = String.valueOf(comboClientes.getSelectedItem());
-                Descuento = labelDescuento.getText();
+                Descuento = Integer.parseInt(labelDescuento.getText());
                 venta_pago ventana = new venta_pago();
                 ventana.setVisible(true);
             }else {
@@ -440,53 +372,94 @@ public class venta_facturacion extends javax.swing.JFrame {
             }
         } catch (Exception e){
             JOptionPane.showMessageDialog(null, "Error al pagar");
-        }
-            
-        
-        
+        }    
     }//GEN-LAST:event_bPagarActionPerformed
 
     private void bFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bFinalizarActionPerformed
-        if (contadorAgregar > 0) {
-            venta_pago ventap = new venta_pago();
+  
+        /*   List<Productos> listP = cProductos.findProductosEntities();
+    for(int i=0; i< contadorAgregar; i++){
+        for (int j = 0; j < listP.size(); j++) {
+                        if (listP.get(j).getProdNombre() == modelo.getValueAt(i, 0)) {
+                            //Prod = cProductos.findProductos(j);
+                            System.out.println("scnksbchsdbchsajc");
+                        }}}*/
+                        
+        if(contadorAgregar > 0){
+        if (venta_pago.ordenN == 1) {
+        //    for (int i = 0; i < contadorAgregar; i++) {System.out.println(modelo.getValueAt(i, 0));}}}
             try {
                 for (int i = 0; i < contadorAgregar; i++) {
-                    Detallesorden c = new Detallesorden();
-
-                    c.setOrdCodigo(ventap.Orden);
-
-                    String prodN = (String) modelo.getValueAt(i, 0);
                     List<Productos> listP = cProductos.findProductosEntities();
+                    String prodN = (String) modelo.getValueAt(i, 0);
+                   
                     int contadorw = 0;
                     while (listP.get(contadorw).getProdNombre() != prodN) {
                         contadorw++;
                     }
                     contadorw++;
-                    Productos prod = new Productos();
-                    prod.prodCodigo = contadorw;
-
-                    System.out.println(prod);
-                    c.setProdCodigo(prod);
-
-                    c.setDetCantidad(Integer.parseInt((String) modelo.getValueAt(i, 2)));
-                    c.setDetDescripcion((String) modelo.getValueAt(i, 1));
-
-                    cDetalles.create(c);
-                    //  System.out.println(c.getDetCodigo());
+                    
+                    Prod = cProductos.findProductos(contadorw);
+                    int cantidadd = Integer.parseInt(txtCantidad.getText());
+                    String colorr = (String) comboColor.getSelectedItem();
+                    logica_venta_facturacion.crearDeta(Prod,cantidadd,colorr);
+                    System.out.println("Se realizo detalles");
                 }
-                // System.out.println(ventap.Orden);
-                System.out.println("Los datos fueron guardados");
+               
+                 // CrearModelo();
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e.getMessage());
-                System.out.println("No ha realizado pago");
+                System.out.println("Error al crear los detalles de ordenes");
             }
-        }else {
-            JOptionPane.showMessageDialog(null, "Selecciones como minimo un producto.");
+        }else{
+            JOptionPane.showMessageDialog(null, "No ha realizado pago");
         }
-           
+    }else{
+            JOptionPane.showMessageDialog(null, "Agregue al menos un producto");
+    }
+      /*  int numOrden = cOrdenes.getOrdenesCount();
+            if (contadorAgregar > 0) {
+            if (venta_pago.ordenN == 1) {
+                
+                    try {
+                        for (int i = 0; i < contadorAgregar; i++) {
+                            Detallesorden c = new Detallesorden();
+                            //c.setOrdCodigo(cOrdenes.findOrdenes(numOrden).getOrdCodigo());   // ordCodigo!!
+                            c.setOrdCodigo(cOrdenes.findOrdenes(numOrden));
+                            String prodN = (String) modelo.getValueAt(i, 0);
+                            List<Productos> listP = cProductos.findProductosEntities();
+                            int codigoF = 0;
+                            for (int f = 0; f < listP.size(); f++) {
+                                if (listP.get(f).getProdNombre() == prodN) {
+                                    codigoF = listP.get(f).getProdCodigo();
+                                }
+                            }
+                            Productos prod = cProductos.findProductos(codigoF);
+                            c.setProdCodigo(prod); // prodCodigo!!
+                            c.setDetCantidad((int) modelo.getValueAt(i, 2));
+                            c.setDetDescripcion((String) modelo.getValueAt(i, 1));
+                            cDetalles.create(c);
+                            //   this.getContentPane().invalidate();
+                            //  this.getContentPane().validate();
+                            //  this.getContentPane().repaint();
+                        
+                        System.out.println("Los datos fueron guardados");}
+                    } catch (Exception e) {
+                        JOptionPane.showMessageDialog(null, e.getMessage());
+                        System.out.println("Error al crear los detalles de ordenes");
+                    }
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "No ha realizado pago");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Agregue al menos un producto");
+        }
+     */   venta_pago.ordenN = 0;
+     
     }//GEN-LAST:event_bFinalizarActionPerformed
 
-    DefaultTableModel modelo;
+    public static DefaultTableModel modelo;
     private void CrearModelo() {
         try {
             modelo = (new DefaultTableModel(
@@ -593,7 +566,7 @@ public class venta_facturacion extends javax.swing.JFrame {
     private javax.swing.JButton bFinalizar;
     private javax.swing.JButton bInicio;
     private javax.swing.JButton bPagar;
-    private javax.swing.JComboBox<String> comboClientes;
+    public static javax.swing.JComboBox<String> comboClientes;
     private javax.swing.JComboBox<String> comboColor;
     private javax.swing.JComboBox<String> comboProducto;
     private javax.swing.JLabel jLabel1;
@@ -605,9 +578,9 @@ public class venta_facturacion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelCliente;
-    private javax.swing.JLabel labelDescuento;
-    private javax.swing.JLabel labelSubtotal;
-    private javax.swing.JLabel labelTotal;
+    public static javax.swing.JLabel labelDescuento;
+    public static javax.swing.JLabel labelSubtotal;
+    public static javax.swing.JLabel labelTotal;
     private javax.swing.JTable tabla;
     private javax.swing.JTextField txtCantidad;
     // End of variables declaration//GEN-END:variables

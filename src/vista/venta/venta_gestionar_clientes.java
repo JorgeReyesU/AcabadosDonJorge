@@ -238,8 +238,7 @@ public class venta_gestionar_clientes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCancelarActionPerformed
-        venta_facturacion ventana = new venta_facturacion();
-        this.setVisible(false);
+         this.setVisible(false);
     }//GEN-LAST:event_bCancelarActionPerformed
 
     private void bSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSeleccionarActionPerformed
@@ -274,6 +273,7 @@ public class venta_gestionar_clientes extends javax.swing.JFrame {
 
             CrearModelo();
             Cargar_Informacion();
+            venta_facturacion.comboClientes.addItem(c.getCliNIT());
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e.getMessage());
             System.out.println("Problema el guardar datos");
