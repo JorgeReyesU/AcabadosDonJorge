@@ -22,6 +22,7 @@ public class Inicio extends javax.swing.JFrame {
      */
     public Inicio() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -135,8 +136,8 @@ public class Inicio extends javax.swing.JFrame {
     }//GEN-LAST:event_boton_ventaActionPerformed
 
     private void boton_fabricaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_fabricaActionPerformed
-         fabrica_stock_fabrica ventana_fabrica_pedidos = new fabrica_stock_fabrica();
-         ventana_fabrica_pedidos.setVisible(true);
+         fabrica_pedidos ventana = new fabrica_pedidos();
+         ventana.setVisible(true);
          this.setVisible(false);
     }//GEN-LAST:event_boton_fabricaActionPerformed
 

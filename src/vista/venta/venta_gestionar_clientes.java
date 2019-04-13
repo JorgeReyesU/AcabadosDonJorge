@@ -24,6 +24,7 @@ public class venta_gestionar_clientes extends javax.swing.JFrame {
      */
     public venta_gestionar_clientes() {
         initComponents();
+        this.setLocationRelativeTo(null);
         CrearModelo();
         Cargar_Informacion();
     }

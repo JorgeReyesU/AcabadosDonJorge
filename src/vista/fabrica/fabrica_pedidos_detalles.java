@@ -30,6 +30,7 @@ public class fabrica_pedidos_detalles extends javax.swing.JFrame {
      */
     public fabrica_pedidos_detalles() {
         initComponents();
+        this.setLocationRelativeTo(null);
         CrearModelo();
         Cargar_Informacion();
     }

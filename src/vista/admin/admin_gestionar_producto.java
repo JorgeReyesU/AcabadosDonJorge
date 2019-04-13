@@ -26,6 +26,7 @@ public class admin_gestionar_producto extends javax.swing.JFrame {
      */
     public admin_gestionar_producto() {
         initComponents();
+        this.setLocationRelativeTo(null);
         CrearModelo();
         Cargar_Informacion();
     }

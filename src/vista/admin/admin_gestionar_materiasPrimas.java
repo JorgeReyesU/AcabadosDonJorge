@@ -26,6 +26,7 @@ public class admin_gestionar_materiasPrimas extends javax.swing.JFrame {
      */
     public admin_gestionar_materiasPrimas() {
         initComponents();
+        this.setLocationRelativeTo(null);
         CrearModelo();
         Cargar_Informacion();
     }

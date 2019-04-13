@@ -26,6 +26,7 @@ public class admin_gestionar_clientes extends javax.swing.JFrame {
      */
     public admin_gestionar_clientes() {
         initComponents();
+        this.setLocationRelativeTo(null);
         CrearModelo();
         Cargar_Informacion();
     }

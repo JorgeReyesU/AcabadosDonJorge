@@ -5,17 +5,29 @@
  */
 package vista.fabrica;
 
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import modelo.Productos;
+import persistencia.ProductosJpaController;
+import vista.Inicio;
+
 /**
  *
  * @author Kings
  */
 public class fabrica_stock_utileria extends javax.swing.JFrame {
-
+    ProductosJpaController cProductos = new ProductosJpaController();
+    Productos cEdit;
+    
     /**
      * Creates new form fabrica_stock_utileria
      */
     public fabrica_stock_utileria() {
         initComponents();
+        this.setLocationRelativeTo(null);
+        CrearModelo();
+        Cargar_Informacion();
     }
 
     /**
@@ -27,22 +39,247 @@ public class fabrica_stock_utileria extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabla = new javax.swing.JTable();
+        txtAgregar = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        bInicio2 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        bStockF = new javax.swing.JButton();
+        bStockM = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(tabla);
+
+        jButton1.setText("Agregar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        bInicio2.setText("Inicio");
+        bInicio2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bInicio2ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Pedidos");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
+        bStockF.setText("Stock - F");
+        bStockF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bStockFActionPerformed(evt);
+            }
+        });
+
+        bStockM.setText("Stock - M");
+        bStockM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bStockMActionPerformed(evt);
+            }
+        });
+
+        jButton3.setText("Stock - U");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setText("Observaciones");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(bInicio2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bStockF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(bStockM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 836, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(txtAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(76, 76, 76)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bInicio2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bStockF, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bStockM, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        cEdit = (Productos) tabla.getValueAt(tabla.getSelectedRow(), 0);
+       // int num = (int) tabla.getValueAt(tabla.getSelectedRow(), 0);
+       // OEdit = cOrdenes.findOrdenes(num);
+       int cantidadP = cEdit.getProdCantidad();
+       int cantidadA = Integer.parseInt(txtAgregar.getText());
+       cEdit.setProdCantidad(cantidadP + cantidadA);
+        try {
+            cProductos.edit(cEdit);
+            CrearModelo();
+            Cargar_Informacion();
+        } catch (Exception ex) {
+            System.out.println("Error al despachar el producto");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void bInicio2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bInicio2ActionPerformed
+        Inicio ventana = new Inicio();
+        ventana.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_bInicio2ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        fabrica_pedidos ventana = new fabrica_pedidos();
+        ventana.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void bStockFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bStockFActionPerformed
+        fabrica_stock_fabrica ventana = new fabrica_stock_fabrica();
+        ventana.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_bStockFActionPerformed
+
+    private void bStockMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bStockMActionPerformed
+        fabrica_stock_materiasPrimas ventana = new fabrica_stock_materiasPrimas();
+        ventana.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_bStockMActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        fabrica_stock_utileria ventana = new fabrica_stock_utileria();
+        ventana.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton5ActionPerformed
+
+    DefaultTableModel modelo;
+    private void CrearModelo() {
+        try {
+            modelo = (new DefaultTableModel(
+                    null, new String[]{
+                        "Codigo", "Nombre", "Descripcion",
+                        "Unidad", "Cantidad", "P. Comprado",
+                        "P. Venta", "Proveedor"}) {
+                Class[] types = new Class[]{
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class,
+                    java.lang.String.class
+                };
+                boolean[] canEdit = new boolean[]{
+                    false, false, false, false, false, false, false, false
+                };
+
+                @Override
+                public Class getColumnClass(int columnIndex) {
+                    return types[columnIndex];
+                }
+
+                @Override
+                public boolean isCellEditable(int rowIndex, int colIndex) {
+                    return canEdit[colIndex];
+                }
+            });
+            tabla.setModel(modelo);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.toString() + "error");
+            System.out.println("Problema con el modelo de tabla");
+        }
+    }
+    
+    
+    private void Cargar_Informacion(){
+        try{
+            Object o[]=null;
+            List<Productos> listP = cProductos.findProductosEntities();
+            int contadorr=0;
+            for (int i=0; i< listP.size(); i++){
+                String productoF = listP.get(i).getProdDescripcion();
+                String productoF2 = listP.get(2).getProdDescripcion();
+                if(productoF.equals(productoF2)){
+                    modelo.addRow(o);
+                    modelo.setValueAt(listP.get(i), contadorr, 0);
+                    modelo.setValueAt(listP.get(i).getProdNombre(), contadorr, 1);
+                    modelo.setValueAt(listP.get(i).getProdDescripcion(), contadorr, 2);
+                    modelo.setValueAt(listP.get(i).getProdUnidadMedida(), contadorr, 3);
+                    modelo.setValueAt(listP.get(i).getProdCantidad(), contadorr, 4);
+                    modelo.setValueAt(listP.get(i).getProdPrecioComprado(), contadorr, 5);
+                    modelo.setValueAt(listP.get(i).getProdPrecioVenta(), contadorr, 6);
+                    modelo.setValueAt(listP.get(i).getProNIT(), contadorr, 7);
+                    contadorr++;
+                }
+            }                                            
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            System.out.println("problema al cargar datos");
+        }
+    }
+    
+    
     /**
      * @param args the command line arguments
      */
@@ -79,5 +316,15 @@ public class fabrica_stock_utileria extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bInicio2;
+    private javax.swing.JButton bStockF;
+    private javax.swing.JButton bStockM;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tabla;
+    private javax.swing.JTextField txtAgregar;
     // End of variables declaration//GEN-END:variables
 }

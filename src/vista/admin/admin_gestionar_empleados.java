@@ -27,6 +27,7 @@ public class admin_gestionar_empleados extends javax.swing.JFrame {
      */
     public admin_gestionar_empleados() {
         initComponents();
+        this.setLocationRelativeTo(null);
         CrearModelo();
         Cargar_Informacion();
     }

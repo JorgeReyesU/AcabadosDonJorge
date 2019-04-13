@@ -29,6 +29,7 @@ public class fabrica_stock_fabrica extends javax.swing.JFrame {
      */
     public fabrica_stock_fabrica() {
         initComponents();
+        this.setLocationRelativeTo(null);
         CrearModelo();
         Cargar_Informacion();
     }
@@ -46,8 +47,11 @@ public class fabrica_stock_fabrica extends javax.swing.JFrame {
         tabla = new javax.swing.JTable();
         bAgregar = new javax.swing.JButton();
         bInicio = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
         bStockF = new javax.swing.JButton();
         bStockM = new javax.swing.JButton();
+        jButton3 = new javax.swing.JButton();
+        jButton5 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -78,6 +82,13 @@ public class fabrica_stock_fabrica extends javax.swing.JFrame {
             }
         });
 
+        jButton2.setText("Pedidos");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         bStockF.setText("Stock - F");
         bStockF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -92,23 +103,37 @@ public class fabrica_stock_fabrica extends javax.swing.JFrame {
             }
         });
 
+        jButton3.setText("Stock - U");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jButton5.setText("Observaciones");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(bInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(bStockF, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(bStockM)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 986, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(bAgregar)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(bInicio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bStockF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bStockM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 986, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bAgregar, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addGap(22, 22, 22))
         );
         layout.setVerticalGroup(
@@ -116,14 +141,20 @@ public class fabrica_stock_fabrica extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(bInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(bStockF, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bStockM, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(26, 26, 26)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(bStockM, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
                 .addComponent(bAgregar)
                 .addGap(40, 40, 40))
@@ -183,8 +214,16 @@ public class fabrica_stock_fabrica extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_bInicioActionPerformed
 
-    private void bStockFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bStockFActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        fabrica_pedidos ventana = new fabrica_pedidos();
+        ventana.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void bStockFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bStockFActionPerformed
+        fabrica_stock_fabrica ventana = new fabrica_stock_fabrica();
+        ventana.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_bStockFActionPerformed
 
     private void bStockMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bStockMActionPerformed
@@ -192,6 +231,18 @@ public class fabrica_stock_fabrica extends javax.swing.JFrame {
         ventana.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_bStockMActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        fabrica_stock_utileria ventana = new fabrica_stock_utileria();
+        ventana.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        fabrica_Observaciones ventana = new fabrica_Observaciones();
+        ventana.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     DefaultTableModel modelo;
     private void CrearModelo() {
@@ -237,20 +288,21 @@ public class fabrica_stock_fabrica extends javax.swing.JFrame {
         try{
             Object o[]=null;
             List<Productos> listP = cProductos.findProductosEntities();
-            
+            int contadorr = 0;
             for (int i=0; i< listP.size(); i++){
                 String productoF = listP.get(i).getProdDescripcion();
                 String productoF2 = listP.get(0).getProdDescripcion();
                 if(productoF.equals(productoF2)){
                     modelo.addRow(o);
-                    modelo.setValueAt(listP.get(i), i, 0);
-                    modelo.setValueAt(listP.get(i).getProdNombre(), i, 1);
-                    modelo.setValueAt(listP.get(i).getProdDescripcion(), i, 2);
-                    modelo.setValueAt(listP.get(i).getProdUnidadMedida(), i, 3);
-                    modelo.setValueAt(listP.get(i).getProdCantidad(), i, 4);
-                    modelo.setValueAt(listP.get(i).getProdPrecioComprado(), i, 5);
-                    modelo.setValueAt(listP.get(i).getProdPrecioVenta(), i, 6);
-                    modelo.setValueAt(listP.get(i).getProNIT(), i, 7);
+                    modelo.setValueAt(listP.get(i), contadorr, 0);
+                    modelo.setValueAt(listP.get(i).getProdNombre(), contadorr, 1);
+                    modelo.setValueAt(listP.get(i).getProdDescripcion(), contadorr, 2);
+                    modelo.setValueAt(listP.get(i).getProdUnidadMedida(), contadorr, 3);
+                    modelo.setValueAt(listP.get(i).getProdCantidad(), contadorr, 4);
+                    modelo.setValueAt(listP.get(i).getProdPrecioComprado(), contadorr, 5);
+                    modelo.setValueAt(listP.get(i).getProdPrecioVenta(), contadorr, 6);
+                    modelo.setValueAt(listP.get(i).getProNIT(), contadorr, 7);
+                    contadorr++;
                 }
             }                                            
         }catch(Exception e){
@@ -302,6 +354,10 @@ public class fabrica_stock_fabrica extends javax.swing.JFrame {
     private javax.swing.JButton bInicio;
     private javax.swing.JButton bStockF;
     private javax.swing.JButton bStockM;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabla;
     // End of variables declaration//GEN-END:variables
