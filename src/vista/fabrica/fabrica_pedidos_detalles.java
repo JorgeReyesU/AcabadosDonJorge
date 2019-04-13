@@ -6,25 +6,29 @@
 package vista.fabrica;
 
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.Detallesorden;
 import modelo.Ordenes;
+import modelo.Productos;
+import persistencia.DetallesordenJpaController;
 import persistencia.OrdenesJpaController;
+import persistencia.ProductosJpaController;
+//import vista.fabrica.fabrica_pedidos;
 
 /**
  *
  * @author Kings
  */
-public class fabrica_pedidos extends javax.swing.JFrame {
+public class fabrica_pedidos_detalles extends javax.swing.JFrame {
+    DetallesordenJpaController cDetalles = new DetallesordenJpaController();
     OrdenesJpaController cOrdenes = new OrdenesJpaController();
-    public static Ordenes oEdit;
-    Ordenes OEdit;
+    ProductosJpaController cProductos = new ProductosJpaController();
+    Detallesorden dEdit;
     /**
-     * Creates new form fabrica_pedidos
+     * Creates new form fabrica_pedidos_detalles
      */
-    public fabrica_pedidos() {
+    public fabrica_pedidos_detalles() {
         initComponents();
         CrearModelo();
         Cargar_Informacion();
@@ -41,7 +45,6 @@ public class fabrica_pedidos extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
-        bMostrar = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -59,14 +62,7 @@ public class fabrica_pedidos extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabla);
 
-        bMostrar.setText("Mostrar");
-        bMostrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bMostrarActionPerformed(evt);
-            }
-        });
-
-        jButton1.setText("Despachado");
+        jButton1.setText("Cancelar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -77,52 +73,30 @@ public class fabrica_pedidos extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 893, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(bMostrar, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 803, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bMostrar)
-                    .addComponent(jButton1))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 691, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton1)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
- public static int nume;
-    private void bMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bMostrarActionPerformed
-        int num = (int) tabla.getValueAt(tabla.getSelectedRow(), 0);
-        nume = (int) tabla.getValueAt(tabla.getSelectedRow(), 0);
-        //System.out.println(cOrdenes.findOrdenes(num));
-        oEdit = cOrdenes.findOrdenes(num);
-        System.out.println(oEdit);
-        fabrica_pedidos_detalles ventana = new fabrica_pedidos_detalles();
-        ventana.setVisible(true);
-    }//GEN-LAST:event_bMostrarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        int num = (int) tabla.getValueAt(tabla.getSelectedRow(), 0);
-        OEdit = cOrdenes.findOrdenes(num);
-        OEdit.setOrdComentario("*");
-        try {
-            cOrdenes.edit(OEdit);
-            CrearModelo();
-            Cargar_Informacion();
-        } catch (Exception ex) {
-            System.out.println("Error al despachar el producto");
-        }
+        this.setVisible(false);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     DefaultTableModel modelo;
@@ -130,16 +104,14 @@ public class fabrica_pedidos extends javax.swing.JFrame {
         try {
             modelo = (new DefaultTableModel(
                     null, new String[]{
-                        "Codigo", "Fecha Despacho", "Direccion",
-                        "Telefono"}) {
+                        "Producto", "Cantidad", "Color"}) {
                 Class[] types = new Class[]{
-                    java.lang.String.class,
                     java.lang.String.class,
                     java.lang.String.class,
                     java.lang.String.class
                 };
                 boolean[] canEdit = new boolean[]{
-                    false, false, false, false
+                    false, false, false
                 };
 
                 @Override
@@ -159,29 +131,50 @@ public class fabrica_pedidos extends javax.swing.JFrame {
         }
     }
     
-    
     private void Cargar_Informacion(){
-        try{
             Object o[]=null;
-            List<Ordenes> listP = cOrdenes.findOrdenesEntities();
-            int contadorr=0;
+            List<Ordenes> listO = cOrdenes.findOrdenesEntities();
+            List<Detallesorden> listP = cDetalles.findDetallesordenEntities();
+            int contadorr = 0;
             for (int i=0; i< listP.size(); i++){
-                //String OrdenF = listP.get(i).getOrdComentario();
-               // String productoF2 = listP.get(0).getProdDescripcion();
-                if(listP.get(i).getOrdComentario().equals("-")){
+               // System.out.println(fabrica_pedidos.oEdit);
+             //   Ordenes ord = cOrdenes.findOrdenes(i);
+              //  System.out.println(fabrica_pedidos.oEdit);
+               // System.out.println(cOrdenes.findOrdenes(i));
+               Ordenes numero = listP.get(i).getOrdCodigo();
+               int numeroo = numero.getOrdCodigo();
+               if(fabrica_pedidos.nume == numeroo){
+                   Productos prod = listP.get(i).getProdCodigo();
+                   
+                  // System.out.println( prod.getProdNombre() +", Cantidad: "+ listP.get(i).getDetCantidad() +", Color: "+listP.get(i).getDetDescripcion() + "     " + i);
                     modelo.addRow(o);
-                    modelo.setValueAt(listP.get(i).getOrdCodigo(), contadorr, 0);
-                    modelo.setValueAt(listP.get(i).getOrdFechaDespacho(), contadorr, 1);
-                    modelo.setValueAt(listP.get(i).getOrdDireccionEnvio(), contadorr, 2);
-                    modelo.setValueAt(listP.get(i).getOrdTelefonoEnvio(), contadorr, 3);
+                    modelo.setValueAt(prod.getProdNombre(), contadorr, 0);
+                  //  modelo.setValueAt(Nombre, i, 0);
+                    modelo.setValueAt(listP.get(i).getDetCantidad(), contadorr, 1);
+                    modelo.setValueAt(listP.get(i).getDetDescripcion(), contadorr, 2);
                     contadorr++;
+               }
+               
+            //    if(fabrica_pedidos.oEdit == cOrdenes.findOrdenes(i)){
+              //      System.out.println("XXXXXXXXXXXXXXXXXXXXX"); 
+              //  }else {System.out.println("No");}
+             //   modelo.addRow(o);
+            //    modelo.setValueAt(listP.get(i).getDetCantidad(), i, 0);
+             //   modelo.setValueAt(listP.get(i).getDetDescripcion(), i, 1);
+              //  if(fabrica_pedidos.codigoOrd == listP.get(i).getOrdCodigo().getOrdCodigo()){
+                //    System.out.println("dkcmksmcskmcskd");
+                    //String Nombre = cProductos.findProductos(cod).getProdNombre();
+ 
+              //      modelo.addRow(o);
+               //     modelo.setValueAt("dcdcd", i, 0);
+                    //modelo.setValueAt(Nombre, i, 0);
+                   // modelo.setValueAt(listP.get(i).getDetCantidad(), i, 1);
+                 //   modelo.setValueAt(listP.get(i).getDetDescripcion(), i, 2);
                 }
-            }                                            
-        }catch(Exception e){
-            JOptionPane.showMessageDialog(null, e.getMessage());
-            System.out.println("problema al cargar datos");
-        }
+                                               
     }
+    
+    
     
     
     /**
@@ -201,26 +194,25 @@ public class fabrica_pedidos extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(fabrica_pedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fabrica_pedidos_detalles.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(fabrica_pedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fabrica_pedidos_detalles.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(fabrica_pedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fabrica_pedidos_detalles.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(fabrica_pedidos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(fabrica_pedidos_detalles.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new fabrica_pedidos().setVisible(true);
+                new fabrica_pedidos_detalles().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bMostrar;
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabla;

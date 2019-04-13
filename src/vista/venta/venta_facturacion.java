@@ -30,7 +30,7 @@ public class venta_facturacion extends javax.swing.JFrame {
     DetallesordenJpaController cDetalles = new DetallesordenJpaController();
     OrdenesJpaController cOrdenes = new OrdenesJpaController();
     public static Ordenes Ordennnn;
-    Productos Prod;
+    
     /**
      * Creates new form venta_facturacion
      */
@@ -298,33 +298,35 @@ public class venta_facturacion extends javax.swing.JFrame {
     public static int subtotal = 0;
     int total = 0;
     private void bAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAgregarActionPerformed
-        Object o[] = null;
         List<Productos> listP = cProductos.findProductosEntities();
         int codigo = 0;
         String prodNombre = (String) comboProducto.getSelectedItem();
-        for(int i=0; i<listP.size(); i++){
-            if(listP.get(i).getProdNombre() == prodNombre){
+        for (int i = 0; i < listP.size(); i++) {
+            if (listP.get(i).getProdNombre() == prodNombre) {
                 codigo = listP.get(i).getProdCodigo();
             }
         }
         String prodColor = (String) comboColor.getSelectedItem();
         int cantidadP = Integer.parseInt(txtCantidad.getText());
+        System.out.println(cantidadP);
         String unidad = cProductos.findProductos(codigo).getProdUnidadMedida();
         int valorU = cProductos.findProductos(codigo).getProdPrecioVenta();
         int totalP = cantidadP * valorU;
-         
+       // JOptionPane.showMessageDialog(null, cantidadP);
         int cantidadProd = cProductos.findProductos(codigo).getProdCantidad();
-        if(cantidadP > 0){
-            if(cantidadP <= cantidadProd){
+        if (cantidadP > 0) {
+            if (cantidadP <= cantidadProd) {
+                 
                 logica_venta_facturacion.agregarItemTabla(contadorAgregar, prodNombre, prodColor, cantidadP, unidad, valorU, totalP);
                 contadorAgregar++;
-            }else {
+            } else {
                 JOptionPane.showMessageDialog(null, "No existe en stock la cantidad solicitada de este producto. \n"
-                + "Solo quedan: " + cantidadProd + " Unidades de " + prodNombre);
+                        + "Solo quedan: " + cantidadProd + " Unidades de " + prodNombre);
             }
-        }else {
+        } else {
             JOptionPane.showMessageDialog(null, "Ingrese una cantidad mayor a 0.");
         }
+        //JOptionPane.showMessageDialog(null, totalP);
         logica_venta_facturacion.subtotalL(contadorAgregar, totalP); //Subtotal
         logica_venta_facturacion.totalL();
     }//GEN-LAST:event_bAgregarActionPerformed
@@ -392,18 +394,35 @@ public class venta_facturacion extends javax.swing.JFrame {
                 for (int i = 0; i < contadorAgregar; i++) {
                     List<Productos> listP = cProductos.findProductosEntities();
                     String prodN = (String) modelo.getValueAt(i, 0);
-                   
+                    int cantidadd = (Integer) modelo.getValueAt(i, 2);
                     int contadorw = 0;
                     while (listP.get(contadorw).getProdNombre() != prodN) {
                         contadorw++;
                     }
                     contadorw++;
+                    //Productos Prod = cProductos.findProductos(contadorw);
+                   // System.out.println(Prod);
                     
-                    Prod = cProductos.findProductos(contadorw);
-                    int cantidadd = Integer.parseInt(txtCantidad.getText());
                     String colorr = (String) comboColor.getSelectedItem();
-                    logica_venta_facturacion.crearDeta(Prod,cantidadd,colorr);
+                    
+                    Detallesorden c = new Detallesorden();
+                   // OrdenesJpaController cOrdenes = new OrdenesJpaController();
+                    int num = cOrdenes.getOrdenesCount();
+                    Ordenes ordenn = cOrdenes.findOrdenes(num);
+                    c.setOrdCodigo(ordenn);
+                    c.setProdCodigo(cProductos.findProductos(contadorw));
+                    c.setDetCantidad(cantidadd);
+                    c.setDetDescripcion(colorr);
+                    cDetalles.create(c);
+                    
+                    
+                  //  logica_venta_facturacion.crearDeta(Prod,cantidadd,colorr);
+                    Productos pEdit = (Productos) cProductos.findProductos(contadorw);
                     System.out.println("Se realizo detalles");
+                    int cantidaddd = pEdit.getProdCantidad();
+                    pEdit.setProdCantidad(cantidaddd - cantidadd)
+                            ;
+                    cProductos.edit(pEdit);
                 }
                
                  // CrearModelo();

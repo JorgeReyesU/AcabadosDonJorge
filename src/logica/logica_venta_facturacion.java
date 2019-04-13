@@ -52,7 +52,7 @@ public class logica_venta_facturacion {
         labelTotal.setText(String.valueOf(total));
     }
     
-    public static void crearDeta(Productos prodCodigo, int cantidad, String color){
+  /*  public static void crearDeta(Productos prodCodigo, int cantidad, String color){
         Detallesorden c = new Detallesorden();
         OrdenesJpaController cOrdenes = new OrdenesJpaController();
         int num = cOrdenes.getOrdenesCount();
@@ -62,5 +62,5 @@ public class logica_venta_facturacion {
         c.setDetCantidad(cantidad);
         c.setDetDescripcion(color);
         cDetalles.create(c);
-    }
+    }*/
 }
