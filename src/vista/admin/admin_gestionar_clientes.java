@@ -50,7 +50,6 @@ public class admin_gestionar_clientes extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
-        txtTipo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         txtDescuento = new javax.swing.JTextField();
@@ -62,6 +61,7 @@ public class admin_gestionar_clientes extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         bCancelar = new javax.swing.JButton();
         txtDireccion = new javax.swing.JTextField();
+        comboTipo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -122,6 +122,8 @@ public class admin_gestionar_clientes extends javax.swing.JFrame {
             }
         });
 
+        comboTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hogar", "Empresa", "Constructor" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -130,20 +132,16 @@ public class admin_gestionar_clientes extends javax.swing.JFrame {
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(bSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(99, 99, 99)
-                        .addComponent(bActualizar))
-                    .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(bCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(47, 47, 47))
                             .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtTipo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
                             .addComponent(txtTelefono, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtNIT, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(comboTipo, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(52, 52, 52)
@@ -175,7 +173,11 @@ public class admin_gestionar_clientes extends javax.swing.JFrame {
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(txtDescuento, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
                                                 .addGap(34, 34, 34)))
-                                        .addGap(159, 159, 159)))))))
+                                        .addGap(159, 159, 159))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(bSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(99, 99, 99)
+                        .addComponent(bActualizar)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 635, Short.MAX_VALUE)
                 .addGap(25, 25, 25))
@@ -224,7 +226,7 @@ public class admin_gestionar_clientes extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(comboTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(57, 57, 57)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(bSeleccionar)
@@ -247,10 +249,10 @@ public class admin_gestionar_clientes extends javax.swing.JFrame {
         txtTelefono.setText(tabla.getValueAt(tabla.getSelectedRow(), 3).toString());
         txtDireccion.setText(tabla.getValueAt(tabla.getSelectedRow(), 4).toString());
         txtEmail.setText(tabla.getValueAt(tabla.getSelectedRow(), 5).toString());
-        txtTipo.setText(tabla.getValueAt(tabla.getSelectedRow(), 6).toString());
+        comboTipo.setSelectedItem(tabla.getValueAt(tabla.getSelectedRow(), 6).toString());
         txtDescuento.setText(tabla.getValueAt(tabla.getSelectedRow(), 7).toString());
 
-        cEdit = (Clientes) tabla.getValueAt(tabla.getSelectedRow(), 0);
+        cEdit = cClientes.findClientes((String) modelo.getValueAt(tabla.getSelectedRow(), 0));
         
     }//GEN-LAST:event_bSeleccionarActionPerformed
 
@@ -264,7 +266,7 @@ public class admin_gestionar_clientes extends javax.swing.JFrame {
             c.setCliTelefono(txtTelefono.getText());
             c.setCliDireccion(txtDireccion.getText());
             c.setCliEmail(txtEmail.getText());
-            c.setCliTipoCliente(txtTipo.getText());
+            c.setCliTipoCliente((String) comboTipo.getSelectedItem());
             c.setCliDescuento(Integer.parseInt(txtDescuento.getText()));
 
             cClientes.create(c);
@@ -286,7 +288,7 @@ public class admin_gestionar_clientes extends javax.swing.JFrame {
             cEdit.setCliTelefono(txtTelefono.getText());
             cEdit.setCliDireccion(txtDireccion.getText());
             cEdit.setCliEmail(txtEmail.getText());
-            cEdit.setCliTipoCliente(txtTipo.getText());
+            cEdit.setCliTipoCliente((String) comboTipo.getSelectedItem());
             cEdit.setCliDescuento(Integer.parseInt(txtDescuento.getText()));
 
             cClientes.edit(cEdit);
@@ -353,7 +355,7 @@ public class admin_gestionar_clientes extends javax.swing.JFrame {
             
             for (int i=0; i< listE.size(); i++){
                 modelo.addRow(o);
-                modelo.setValueAt(listE.get(i), i, 0);
+                modelo.setValueAt(listE.get(i).getCliNIT(), i, 0);
                 modelo.setValueAt(listE.get(i).getCliNombre(), i, 1);
                 modelo.setValueAt(listE.get(i).getCliApellido(), i, 2);
                 modelo.setValueAt(listE.get(i).getCliTelefono(), i, 3);
@@ -410,6 +412,7 @@ public class admin_gestionar_clientes extends javax.swing.JFrame {
     private javax.swing.JButton bCancelar;
     private javax.swing.JButton bGuardar;
     private javax.swing.JButton bSeleccionar;
+    private javax.swing.JComboBox<String> comboTipo;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -427,6 +430,5 @@ public class admin_gestionar_clientes extends javax.swing.JFrame {
     private javax.swing.JTextField txtNIT;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtTelefono;
-    private javax.swing.JTextField txtTipo;
     // End of variables declaration//GEN-END:variables
 }

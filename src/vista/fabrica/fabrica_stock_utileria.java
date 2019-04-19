@@ -42,7 +42,7 @@ public class fabrica_stock_utileria extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         txtAgregar = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        bAgregar = new javax.swing.JButton();
         bInicio2 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         bStockF = new javax.swing.JButton();
@@ -65,10 +65,10 @@ public class fabrica_stock_utileria extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabla);
 
-        jButton1.setText("Agregar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        bAgregar.setText("Agregar");
+        bAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                bAgregarActionPerformed(evt);
             }
         });
 
@@ -133,7 +133,7 @@ public class fabrica_stock_utileria extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(txtAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(76, 76, 76)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(bAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -142,7 +142,7 @@ public class fabrica_stock_utileria extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bInicio2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(bAgregar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -162,8 +162,8 @@ public class fabrica_stock_utileria extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        cEdit = (Productos) tabla.getValueAt(tabla.getSelectedRow(), 0);
+    private void bAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAgregarActionPerformed
+        cEdit = cProductos.findProductos((Integer) modelo.getValueAt(tabla.getSelectedRow(), 0));
        // int num = (int) tabla.getValueAt(tabla.getSelectedRow(), 0);
        // OEdit = cOrdenes.findOrdenes(num);
        int cantidadP = cEdit.getProdCantidad();
@@ -173,10 +173,10 @@ public class fabrica_stock_utileria extends javax.swing.JFrame {
             cProductos.edit(cEdit);
             CrearModelo();
             Cargar_Informacion();
-        } catch (Exception ex) {
-            System.out.println("Error al despachar el producto");
+        } catch (Exception e) {
+            System.out.println("Error al agregar producto");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_bAgregarActionPerformed
 
     private void bInicio2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bInicio2ActionPerformed
         Inicio ventana = new Inicio();
@@ -209,7 +209,9 @@ public class fabrica_stock_utileria extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+        fabrica_Observaciones ventana = new fabrica_Observaciones();
+        ventana.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     DefaultTableModel modelo;
@@ -262,14 +264,14 @@ public class fabrica_stock_utileria extends javax.swing.JFrame {
                 String productoF2 = listP.get(2).getProdDescripcion();
                 if(productoF.equals(productoF2)){
                     modelo.addRow(o);
-                    modelo.setValueAt(listP.get(i), contadorr, 0);
+                    modelo.setValueAt(listP.get(i).getProdCodigo(), contadorr, 0);
                     modelo.setValueAt(listP.get(i).getProdNombre(), contadorr, 1);
                     modelo.setValueAt(listP.get(i).getProdDescripcion(), contadorr, 2);
                     modelo.setValueAt(listP.get(i).getProdUnidadMedida(), contadorr, 3);
                     modelo.setValueAt(listP.get(i).getProdCantidad(), contadorr, 4);
                     modelo.setValueAt(listP.get(i).getProdPrecioComprado(), contadorr, 5);
                     modelo.setValueAt(listP.get(i).getProdPrecioVenta(), contadorr, 6);
-                    modelo.setValueAt(listP.get(i).getProNIT(), contadorr, 7);
+                    modelo.setValueAt(listP.get(i).getProNIT().getProNIT(), contadorr, 7);
                     contadorr++;
                 }
             }                                            
@@ -316,10 +318,10 @@ public class fabrica_stock_utileria extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton bAgregar;
     private javax.swing.JButton bInicio2;
     private javax.swing.JButton bStockF;
     private javax.swing.JButton bStockM;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;

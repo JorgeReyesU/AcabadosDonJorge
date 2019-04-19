@@ -33,7 +33,7 @@
                       </Group>
                       <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="bModificar" pref="101" max="32767" attributes="0"/>
+                          <Component id="bSeleccionar" pref="101" max="32767" attributes="0"/>
                           <Component id="bGuardar" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -96,7 +96,7 @@
               <Component id="txtEmail" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="bModificar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="bSeleccionar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="bActualizar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
@@ -120,12 +120,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtDireccionActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="bModificar">
+    <Component class="javax.swing.JButton" name="bSeleccionar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Seleccionar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bModificarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bSeleccionarActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel2">

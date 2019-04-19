@@ -18,7 +18,7 @@ import persistencia.ProveedoresJpaController;
  */
 public class admin_gestionar_proveedor extends javax.swing.JFrame {
 
-    ProveedoresJpaController cProductos = new ProveedoresJpaController();
+    ProveedoresJpaController cProveedores = new ProveedoresJpaController();
     Proveedores cEdit;
     
     /**
@@ -42,7 +42,7 @@ public class admin_gestionar_proveedor extends javax.swing.JFrame {
     private void initComponents() {
 
         txtDireccion = new javax.swing.JTextField();
-        bModificar = new javax.swing.JButton();
+        bSeleccionar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -66,10 +66,10 @@ public class admin_gestionar_proveedor extends javax.swing.JFrame {
             }
         });
 
-        bModificar.setText("Seleccionar");
-        bModificar.addActionListener(new java.awt.event.ActionListener() {
+        bSeleccionar.setText("Seleccionar");
+        bSeleccionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bModificarActionPerformed(evt);
+                bSeleccionarActionPerformed(evt);
             }
         });
 
@@ -130,7 +130,7 @@ public class admin_gestionar_proveedor extends javax.swing.JFrame {
                             .addComponent(bCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(93, 93, 93)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(bModificar, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
+                            .addComponent(bSeleccionar, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE)
                             .addComponent(bGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)
@@ -179,7 +179,7 @@ public class admin_gestionar_proveedor extends javax.swing.JFrame {
                 .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(56, 56, 56)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bModificar)
+                    .addComponent(bSeleccionar)
                     .addComponent(bActualizar))
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -195,14 +195,15 @@ public class admin_gestionar_proveedor extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bModificarActionPerformed
+    private void bSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSeleccionarActionPerformed
+        txtNIT.setText(tabla.getValueAt(tabla.getSelectedRow(), 0).toString());
         txtNombre.setText(tabla.getValueAt(tabla.getSelectedRow(), 1).toString());
         txtTelefono.setText(tabla.getValueAt(tabla.getSelectedRow(), 2).toString());
         txtDireccion.setText(tabla.getValueAt(tabla.getSelectedRow(), 3).toString());
         txtEmail.setText(tabla.getValueAt(tabla.getSelectedRow(), 4).toString());
         
-        cEdit = (Proveedores) tabla.getValueAt(tabla.getSelectedRow(), 0);
-    }//GEN-LAST:event_bModificarActionPerformed
+        cEdit = cProveedores.findProveedores((String) modelo.getValueAt(tabla.getSelectedRow(), 0));
+    }//GEN-LAST:event_bSeleccionarActionPerformed
 
     private void bCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCancelarActionPerformed
         admin_gestionar ventana = new admin_gestionar();
@@ -220,7 +221,7 @@ public class admin_gestionar_proveedor extends javax.swing.JFrame {
             c.setProDireccion(txtDireccion.getText());
             c.setProEmail(txtEmail.getText());
 
-            cProductos.create(c);
+            cProveedores.create(c);
             System.out.println("Los datos fueron guardados");
 
             CrearModelo();
@@ -238,7 +239,7 @@ public class admin_gestionar_proveedor extends javax.swing.JFrame {
             cEdit.setProDireccion(txtDireccion.getText());
             cEdit.setProEmail(txtEmail.getText());
 
-            cProductos.edit(cEdit);
+            cProveedores.edit(cEdit);
             System.out.println("Se actualizo");
             CrearModelo();
             Cargar_Informacion();
@@ -291,11 +292,11 @@ public class admin_gestionar_proveedor extends javax.swing.JFrame {
     private void Cargar_Informacion(){
         try{
             Object o[]=null;
-            List<Proveedores> listP = cProductos.findProveedoresEntities();
+            List<Proveedores> listP = cProveedores.findProveedoresEntities();
             
             for (int i=0; i< listP.size(); i++){
                 modelo.addRow(o);
-                modelo.setValueAt(listP.get(i), i, 0);
+                modelo.setValueAt(listP.get(i).getProNIT(), i, 0);
                 modelo.setValueAt(listP.get(i).getProNombre(), i, 1);
                 modelo.setValueAt(listP.get(i).getProTelefono(), i, 2);
                 modelo.setValueAt(listP.get(i).getProDireccion(), i, 3);
@@ -347,7 +348,7 @@ public class admin_gestionar_proveedor extends javax.swing.JFrame {
     private javax.swing.JButton bActualizar;
     private javax.swing.JButton bCancelar;
     private javax.swing.JButton bGuardar;
-    private javax.swing.JButton bModificar;
+    private javax.swing.JButton bSeleccionar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

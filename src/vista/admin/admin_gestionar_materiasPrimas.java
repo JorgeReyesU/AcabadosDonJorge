@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import modelo.Materiasprimas;
 import modelo.Proveedores;
 import persistencia.MateriasprimasJpaController;
+import persistencia.ProveedoresJpaController;
 
 /**
  *
@@ -19,6 +20,7 @@ import persistencia.MateriasprimasJpaController;
 public class admin_gestionar_materiasPrimas extends javax.swing.JFrame {
     
     MateriasprimasJpaController cMateriasprimas = new MateriasprimasJpaController();
+    ProveedoresJpaController cProveedores = new ProveedoresJpaController();
     Materiasprimas cEdit;
     
     /**
@@ -41,13 +43,12 @@ public class admin_gestionar_materiasPrimas extends javax.swing.JFrame {
     private void initComponents() {
 
         txtCantidad = new javax.swing.JTextField();
-        bModificar = new javax.swing.JButton();
+        bSeleccionar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtPrecioC = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         txtNITP = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txtUnidad = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         bCancelar = new javax.swing.JButton();
         bGuardar = new javax.swing.JButton();
@@ -58,13 +59,14 @@ public class admin_gestionar_materiasPrimas extends javax.swing.JFrame {
         txtNombre = new javax.swing.JTextField();
         bActualizar = new javax.swing.JButton();
         txtDescripcion = new javax.swing.JTextField();
+        comboUnidad = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        bModificar.setText("Seleccionar");
-        bModificar.addActionListener(new java.awt.event.ActionListener() {
+        bSeleccionar.setText("Seleccionar");
+        bSeleccionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bModificarActionPerformed(evt);
+                bSeleccionarActionPerformed(evt);
             }
         });
 
@@ -114,6 +116,8 @@ public class admin_gestionar_materiasPrimas extends javax.swing.JFrame {
             }
         });
 
+        comboUnidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Kg", "Gal" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -124,21 +128,22 @@ public class admin_gestionar_materiasPrimas extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(bCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(bModificar, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE))
+                            .addComponent(bSeleccionar, javax.swing.GroupLayout.DEFAULT_SIZE, 101, Short.MAX_VALUE))
                         .addGap(93, 93, 93)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(bActualizar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(bGuardar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
-                                .addComponent(txtUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(104, 104, 104))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(txtNombre)
                                 .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(comboUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(45, 45, 45)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel8)
@@ -147,8 +152,8 @@ public class admin_gestionar_materiasPrimas extends javax.swing.JFrame {
                             .addComponent(txtDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
                             .addComponent(jLabel7)
                             .addComponent(txtNITP))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 305, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 546, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 820, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
         );
         layout.setVerticalGroup(
@@ -180,7 +185,7 @@ public class admin_gestionar_materiasPrimas extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(comboUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -188,7 +193,7 @@ public class admin_gestionar_materiasPrimas extends javax.swing.JFrame {
                 .addGap(95, 95, 95)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bActualizar)
-                    .addComponent(bModificar))
+                    .addComponent(bSeleccionar))
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bCancelar)
@@ -203,16 +208,16 @@ public class admin_gestionar_materiasPrimas extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void bModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bModificarActionPerformed
+    private void bSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSeleccionarActionPerformed
         txtNombre.setText(tabla.getValueAt(tabla.getSelectedRow(), 1).toString());
         txtDescripcion.setText(tabla.getValueAt(tabla.getSelectedRow(), 2).toString());
-        txtUnidad.setText(tabla.getValueAt(tabla.getSelectedRow(), 3).toString());
+        comboUnidad.setSelectedItem(modelo.getValueAt(tabla.getSelectedRow(), 3).toString());
         txtCantidad.setText(tabla.getValueAt(tabla.getSelectedRow(), 4).toString());
         txtPrecioC.setText(tabla.getValueAt(tabla.getSelectedRow(), 5).toString());   
-        //txtNITP.setText(tabla.getValueAt(tabla.getSelectedRow(), 7).toString());
+        txtNITP.setText(tabla.getValueAt(tabla.getSelectedRow(), 6).toString());
 
-        cEdit = (Materiasprimas) tabla.getValueAt(tabla.getSelectedRow(), 0); 
-    }//GEN-LAST:event_bModificarActionPerformed
+        cEdit = cMateriasprimas.findMateriasprimas((Integer) modelo.getValueAt(tabla.getSelectedRow(), 0));
+    }//GEN-LAST:event_bSeleccionarActionPerformed
 
     private void bCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCancelarActionPerformed
         admin_gestionar ventana = new admin_gestionar();
@@ -226,7 +231,7 @@ public class admin_gestionar_materiasPrimas extends javax.swing.JFrame {
 
             c.setMatNombre(txtNombre.getText());
             c.setMatDescripcion(txtDescripcion.getText());
-            c.setMatUnidadMedida(txtUnidad.getText());
+            c.setMatUnidadMedida((String) comboUnidad.getSelectedItem());
             c.setMatCatidad(Integer.parseInt(txtCantidad.getText()));
             c.setMatPrecioComprado(Integer.parseInt(txtPrecioC.getText()));
             Proveedores prov = new Proveedores();
@@ -250,6 +255,7 @@ public class admin_gestionar_materiasPrimas extends javax.swing.JFrame {
             cEdit.setMatDescripcion(txtDescripcion.getText());
             cEdit.setMatCatidad(Integer.parseInt(txtCantidad.getText()));
             cEdit.setMatPrecioComprado(Integer.parseInt(txtPrecioC.getText()));
+            cEdit.setProNIT(cProveedores.findProveedores(txtNITP.getText()));
 
             cMateriasprimas.edit(cEdit);
             System.out.println("Se actualizo");
@@ -307,13 +313,13 @@ public class admin_gestionar_materiasPrimas extends javax.swing.JFrame {
             
             for (int i=0; i< listP.size(); i++){
                 modelo.addRow(o);
-                modelo.setValueAt(listP.get(i), i, 0);
+                modelo.setValueAt(listP.get(i).getMatCodigo(), i, 0);
                 modelo.setValueAt(listP.get(i).getMatNombre(), i, 1);
                 modelo.setValueAt(listP.get(i).getMatDescripcion(), i, 2);
                 modelo.setValueAt(listP.get(i).getMatUnidadMedida(), i, 3);
                 modelo.setValueAt(listP.get(i).getMatCatidad(), i, 4);
                 modelo.setValueAt(listP.get(i).getMatPrecioComprado(), i, 5);
-                modelo.setValueAt(listP.get(i).getProNIT(), i, 6);
+                modelo.setValueAt(listP.get(i).getProNIT().getProNIT(), i, 6);
                 
             }                                            
         }catch(Exception e){
@@ -362,7 +368,8 @@ public class admin_gestionar_materiasPrimas extends javax.swing.JFrame {
     private javax.swing.JButton bActualizar;
     private javax.swing.JButton bCancelar;
     private javax.swing.JButton bGuardar;
-    private javax.swing.JButton bModificar;
+    private javax.swing.JButton bSeleccionar;
+    private javax.swing.JComboBox<String> comboUnidad;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -376,6 +383,5 @@ public class admin_gestionar_materiasPrimas extends javax.swing.JFrame {
     private javax.swing.JTextField txtNITP;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPrecioC;
-    private javax.swing.JTextField txtUnidad;
     // End of variables declaration//GEN-END:variables
 }

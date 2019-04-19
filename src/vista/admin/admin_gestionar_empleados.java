@@ -12,6 +12,9 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Empleados;
 import persistencia.EmpleadosJpaController;
+import java.util.Date;
+
+import java.text.DateFormat;
 
 /**
  *
@@ -22,6 +25,13 @@ public class admin_gestionar_empleados extends javax.swing.JFrame {
     EmpleadosJpaController cEmpleados = new EmpleadosJpaController();
     Empleados cEdit;
     
+    
+    java.util.Date fecha = new Date();
+    String strDateFormat = "dd/MM/y";
+    SimpleDateFormat objSDF = new SimpleDateFormat(strDateFormat);
+    //System.out.println(objSDF.format(fecha));
+    String fechaHoy = objSDF.format(fecha);
+    
     /**
      * Creates new form admin_gestionar_empleados
      */
@@ -30,6 +40,15 @@ public class admin_gestionar_empleados extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         CrearModelo();
         Cargar_Informacion();
+    }
+    
+    public static String darFormato(Date date) {
+        if(date == null){
+            return null;
+        }else {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            return simpleDateFormat.format(date).toUpperCase();
+        }
     }
 
     /**
@@ -41,15 +60,11 @@ public class admin_gestionar_empleados extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        txtFN = new javax.swing.JTextField();
         bSeleccionar = new javax.swing.JButton();
-        txtFC = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         txtSalario = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtCargo = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txtGenero = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         bCancelar = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
@@ -62,9 +77,13 @@ public class admin_gestionar_empleados extends javax.swing.JFrame {
         bActualizar = new javax.swing.JButton();
         txtApellido = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        txtFD = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         txtDni = new javax.swing.JTextField();
+        comboGenero = new javax.swing.JComboBox<>();
+        comboCargo = new javax.swing.JComboBox<>();
+        dateNacimiento = new com.toedter.calendar.JDateChooser();
+        dateContratacion = new com.toedter.calendar.JDateChooser();
+        dateDespido = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -127,6 +146,16 @@ public class admin_gestionar_empleados extends javax.swing.JFrame {
 
         jLabel9.setText("Dni:");
 
+        comboGenero.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "M", "F" }));
+
+        comboCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Fabrica", "Venta", "Courier", "Admin" }));
+
+        dateNacimiento.setDateFormatString("dd-MM-yyyy");
+
+        dateContratacion.setDateFormatString("dd-MM-yyyy");
+
+        dateDespido.setDateFormatString("dd-MM-yyyy");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -145,10 +174,10 @@ public class admin_gestionar_empleados extends javax.swing.JFrame {
                                 .addGap(47, 47, 47))
                             .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtSalario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
-                            .addComponent(txtGenero, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtDni, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(comboGenero, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(52, 52, 52)
@@ -168,24 +197,26 @@ public class admin_gestionar_empleados extends javax.swing.JFrame {
                                             .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(txtFN, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(45, 45, 45)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jLabel6)
-                                            .addComponent(txtFC, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jLabel7)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                                .addGap(154, 154, 154))
                                             .addGroup(layout.createSequentialGroup()
-                                                .addComponent(txtCargo, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
-                                                .addGap(34, 34, 34)))
-                                        .addGap(11, 11, 11)
+                                                .addComponent(comboCargo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addGap(45, 45, 45)))
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel1)
-                                            .addComponent(txtFD, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
+                                            .addComponent(dateDespido, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addComponent(jLabel5)
+                                                .addGap(70, 70, 70))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(dateNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(45, 45, 45)))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel6)
+                                            .addComponent(dateContratacion, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 649, Short.MAX_VALUE)
                 .addGap(25, 25, 25))
@@ -211,26 +242,26 @@ public class admin_gestionar_empleados extends javax.swing.JFrame {
                                 .addComponent(txtApellido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(1, 1, 1)
-                                    .addComponent(jLabel5)
-                                    .addGap(6, 6, 6)
-                                    .addComponent(txtFN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                     .addComponent(jLabel6)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtFC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jLabel4)
+                                    .addComponent(dateContratacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                    .addComponent(jLabel4)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(comboGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(1, 1, 1)
+                                .addComponent(jLabel5)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtGenero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(62, 62, 62)
+                                .addComponent(dateNacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(61, 61, 61)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(comboCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel8)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -239,7 +270,7 @@ public class admin_gestionar_empleados extends javax.swing.JFrame {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtFD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(dateDespido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(57, 57, 57)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bSeleccionar)
@@ -262,14 +293,14 @@ public class admin_gestionar_empleados extends javax.swing.JFrame {
         txtDni.setText(tabla.getValueAt(tabla.getSelectedRow(), 0).toString());
         txtNombre.setText(tabla.getValueAt(tabla.getSelectedRow(), 1).toString());
         txtApellido.setText(tabla.getValueAt(tabla.getSelectedRow(), 2).toString());
-        txtGenero.setText(tabla.getValueAt(tabla.getSelectedRow(), 3).toString());
-        txtFN.setText(tabla.getValueAt(tabla.getSelectedRow(), 4).toString());
-        txtFC.setText(tabla.getValueAt(tabla.getSelectedRow(), 5).toString());
+        comboGenero.setSelectedItem(tabla.getValueAt(tabla.getSelectedRow(), 3).toString());
+        dateNacimiento.setDate(cEmpleados.findEmpleados((Integer) modelo.getValueAt(tabla.getSelectedRow(), 0)).getEmpFechaNacimiento());
+        dateContratacion.setDate(cEmpleados.findEmpleados((Integer) modelo.getValueAt(tabla.getSelectedRow(), 0)).getEmpFechaContratacion());
         txtSalario.setText(tabla.getValueAt(tabla.getSelectedRow(), 6).toString());
-        txtCargo.setText(tabla.getValueAt(tabla.getSelectedRow(), 7).toString());
-        txtFD.setText(tabla.getValueAt(tabla.getSelectedRow(), 8).toString());
+        comboCargo.setSelectedItem(tabla.getValueAt(tabla.getSelectedRow(), 7).toString());
+        dateDespido.setDate(cEmpleados.findEmpleados((Integer) modelo.getValueAt(tabla.getSelectedRow(), 0)).getEmpFechaDespido());
         
-        cEdit = (Empleados) tabla.getValueAt(tabla.getSelectedRow(), 0);    
+        cEdit = cEmpleados.findEmpleados((Integer) modelo.getValueAt(tabla.getSelectedRow(), 0));
     }//GEN-LAST:event_bSeleccionarActionPerformed
 
     private void bCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bCancelarActionPerformed
@@ -286,20 +317,20 @@ public class admin_gestionar_empleados extends javax.swing.JFrame {
             c.setEmpNombre(txtNombre.getText());
             c.setEmpApellido(txtApellido.getText());
             
-            String generoS = txtGenero.getText();
+            String generoS = (String) comboGenero.getSelectedItem();
             char genero = generoS.charAt(0);
             c.setEmpGenero(genero);
             
-            Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(txtFN.getText()); 
-            c.setEmpFechaNacimiento(date1);
+          //  Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(txtFN.getText()); 
+            c.setEmpFechaNacimiento(dateNacimiento.getDate());
             
-            Date date2=new SimpleDateFormat("dd/MM/yyyy").parse(txtFC.getText()); 
-            c.setEmpFechaContratacion(date2);
+          //  Date date2=new SimpleDateFormat("dd/MM/yyyy").parse(txtFC.getText()); 
+            c.setEmpFechaContratacion(dateContratacion.getDate());
             
             c.setEmpSalario(Integer.parseInt(txtSalario.getText()));
-            c.setEmpCargo(txtCargo.getText());
+            c.setEmpCargo((String) comboCargo.getSelectedItem());
             
-            Date date3=new SimpleDateFormat("dd/MM/yyyy").parse(txtFD.getText()); 
+          //  Date date3=new SimpleDateFormat("dd/MM/yyyy").parse(txtFD.getText()); 
             c.setEmpFechaDespido(null);           
 
             cEmpleados.create(c);
@@ -319,23 +350,15 @@ public class admin_gestionar_empleados extends javax.swing.JFrame {
             cEdit.setEmpNombre(txtNombre.getText());
             cEdit.setEmpApellido(txtApellido.getText());
             
-            String generoS = txtGenero.getText();
+            String generoS = (String) comboGenero.getSelectedItem();
             char genero = generoS.charAt(0);
             cEdit.setEmpGenero(genero);
-            
-            Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(txtFN.getText()); 
-            cEdit.setEmpFechaNacimiento(date1);
-            
-            Date date2=new SimpleDateFormat("dd/MM/yyyy").parse(txtFC.getText()); 
-            cEdit.setEmpFechaContratacion(date2);
-            
-            cEdit.setEmpSalario(Integer.parseInt(txtSalario.getText()));
-            
-            cEdit.setEmpCargo(txtCargo.getText());
-            
-            Date date3=new SimpleDateFormat("dd/MM/yyyy").parse(txtFD.getText()); 
-            cEdit.setEmpFechaDespido(date3);
-            
+
+            cEdit.setEmpFechaNacimiento(dateNacimiento.getDate());
+            cEdit.setEmpFechaContratacion(dateContratacion.getDate());           
+            cEdit.setEmpSalario(Integer.parseInt(txtSalario.getText()));           
+            cEdit.setEmpCargo((String) comboCargo.getSelectedItem());
+            cEdit.setEmpFechaDespido(dateDespido.getDate());           
 
             cEmpleados.edit(cEdit);
             System.out.println("Se actualizo");
@@ -344,8 +367,7 @@ public class admin_gestionar_empleados extends javax.swing.JFrame {
         }catch (Exception e){
             JOptionPane.showMessageDialog(null, e.toString() + "error");
             System.out.println("Error al actualizar");
-        }
-        
+        }   
     }//GEN-LAST:event_bActualizarActionPerformed
 
     DefaultTableModel modelo;
@@ -396,15 +418,15 @@ public class admin_gestionar_empleados extends javax.swing.JFrame {
             
             for (int i=0; i< listE.size(); i++){
                 modelo.addRow(o);
-                modelo.setValueAt(listE.get(i), i, 0);
+                modelo.setValueAt(listE.get(i).getEmpDni(), i, 0);
                 modelo.setValueAt(listE.get(i).getEmpNombre(), i, 1);
                 modelo.setValueAt(listE.get(i).getEmpApellido(), i, 2);
                 modelo.setValueAt(listE.get(i).getEmpGenero(), i, 3);
-                modelo.setValueAt(listE.get(i).getEmpFechaNacimiento(), i, 4);
-                modelo.setValueAt(listE.get(i).getEmpFechaContratacion(), i, 5);
+                modelo.setValueAt(darFormato(listE.get(i).getEmpFechaNacimiento()), i, 4);
+                modelo.setValueAt(darFormato(listE.get(i).getEmpFechaContratacion()), i, 5);
                 modelo.setValueAt(listE.get(i).getEmpSalario(), i, 6);
                 modelo.setValueAt(listE.get(i).getEmpCargo(), i, 7);
-                modelo.setValueAt(listE.get(i).getEmpFechaDespido(), i, 8);
+                modelo.setValueAt(darFormato(listE.get(i).getEmpFechaDespido()), i, 8);
                 
             }                                            
         }catch(Exception e){
@@ -454,6 +476,11 @@ public class admin_gestionar_empleados extends javax.swing.JFrame {
     private javax.swing.JButton bCancelar;
     private javax.swing.JButton bGuardar;
     private javax.swing.JButton bSeleccionar;
+    private javax.swing.JComboBox<String> comboCargo;
+    private javax.swing.JComboBox<String> comboGenero;
+    private com.toedter.calendar.JDateChooser dateContratacion;
+    private com.toedter.calendar.JDateChooser dateDespido;
+    private com.toedter.calendar.JDateChooser dateNacimiento;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -466,12 +493,7 @@ public class admin_gestionar_empleados extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabla;
     private javax.swing.JTextField txtApellido;
-    private javax.swing.JTextField txtCargo;
     private javax.swing.JTextField txtDni;
-    private javax.swing.JTextField txtFC;
-    private javax.swing.JTextField txtFD;
-    private javax.swing.JTextField txtFN;
-    private javax.swing.JTextField txtGenero;
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtSalario;
     // End of variables declaration//GEN-END:variables

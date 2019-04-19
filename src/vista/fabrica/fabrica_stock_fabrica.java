@@ -164,15 +164,15 @@ public class fabrica_stock_fabrica extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAgregarActionPerformed
-        try{
+        try {
             List<Productos> listP = cProductos.findProductosEntities();
-       //     String productoF = listP.get(i).getProdDescripcion();
+            //     String productoF = listP.get(i).getProdDescripcion();
             String productoF1 = listP.get(0).getProdNombre();
             String productoF2 = listP.get(1).getProdNombre();
             int numeroo = tabla.getSelectedRow();
             String Nombree = (String) modelo.getValueAt(numeroo, 1);
-            if(Nombree.equals(productoF1) && (contadorG < 3)){
-                cEdit = (Productos) tabla.getValueAt(tabla.getSelectedRow(), 0);
+            if (Nombree.equals(productoF1) && (contadorG < 3)) {
+                cEdit = cProductos.findProductos((Integer) modelo.getValueAt(tabla.getSelectedRow(), 0));
                 int numero = tabla.getSelectedRow();
                 int cantidadS = (int) modelo.getValueAt(numero, 4);
                 //System.out.println(cantidadS);
@@ -180,22 +180,21 @@ public class fabrica_stock_fabrica extends javax.swing.JFrame {
                 cEdit.setProdCantidad(cantidadS + 300);
                 logicaF.reducirMP(0);
                 contadorG++;
-            }else if(Nombree.equals(productoF1) && contadorG > 2){
-                JOptionPane.showMessageDialog(null,"ya se agregaron demasiados lotes de graniplas por hoy");
+            } else if (Nombree.equals(productoF1) && contadorG > 2) {
+                JOptionPane.showMessageDialog(null, "ya se agregaron demasiados lotes de graniplas por hoy");
             }
-            
-            
-            if(Nombree.equals(productoF2) && (contadorP < 3)){
-                cEdit = (Productos) tabla.getValueAt(tabla.getSelectedRow(), 0);
+
+            if (Nombree.equals(productoF2) && (contadorP < 3)) {
+                cEdit = cProductos.findProductos((Integer) modelo.getValueAt(tabla.getSelectedRow(), 0));
                 int numero = tabla.getSelectedRow();
                 int cantidadS = (int) modelo.getValueAt(numero, 4);
-              //  System.out.println(cantidadS);
+                //  System.out.println(cantidadS);
 
                 cEdit.setProdCantidad(cantidadS + 60);
                 logicaF.reducirMP(1);
-                contadorP ++;
-            }else if(Nombree.equals(productoF2) && contadorP > 2){
-                JOptionPane.showMessageDialog(null,"ya se agregaron demasiados lotes de pintura por hoy");
+                contadorP++;
+            } else if (Nombree.equals(productoF2) && contadorP > 2) {
+                JOptionPane.showMessageDialog(null, "ya se agregaron demasiados lotes de pintura por hoy");
             }
 
             cProductos.edit(cEdit);
@@ -294,14 +293,14 @@ public class fabrica_stock_fabrica extends javax.swing.JFrame {
                 String productoF2 = listP.get(0).getProdDescripcion();
                 if(productoF.equals(productoF2)){
                     modelo.addRow(o);
-                    modelo.setValueAt(listP.get(i), contadorr, 0);
+                    modelo.setValueAt(listP.get(i).getProdCodigo(), contadorr, 0);
                     modelo.setValueAt(listP.get(i).getProdNombre(), contadorr, 1);
                     modelo.setValueAt(listP.get(i).getProdDescripcion(), contadorr, 2);
                     modelo.setValueAt(listP.get(i).getProdUnidadMedida(), contadorr, 3);
                     modelo.setValueAt(listP.get(i).getProdCantidad(), contadorr, 4);
                     modelo.setValueAt(listP.get(i).getProdPrecioComprado(), contadorr, 5);
                     modelo.setValueAt(listP.get(i).getProdPrecioVenta(), contadorr, 6);
-                    modelo.setValueAt(listP.get(i).getProNIT(), contadorr, 7);
+                    modelo.setValueAt(listP.get(i).getProNIT().getProNIT(), contadorr, 7);
                     contadorr++;
                 }
             }                                            

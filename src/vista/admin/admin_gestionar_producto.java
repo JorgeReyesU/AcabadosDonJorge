@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import modelo.Productos;
 import modelo.Proveedores;
 import persistencia.ProductosJpaController;
+import persistencia.ProveedoresJpaController;
 
 /**
  *
@@ -18,6 +19,7 @@ import persistencia.ProductosJpaController;
  */
 public class admin_gestionar_producto extends javax.swing.JFrame {
     
+    ProveedoresJpaController cProveedores = new ProveedoresJpaController();
     ProductosJpaController cProductos = new ProductosJpaController();
     Productos cEdit;
     
@@ -43,7 +45,7 @@ public class admin_gestionar_producto extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        bModificar = new javax.swing.JButton();
+        bSeleccionar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -57,19 +59,19 @@ public class admin_gestionar_producto extends javax.swing.JFrame {
         txtPrecioV = new javax.swing.JTextField();
         txtPrecioC = new javax.swing.JTextField();
         txtNITP = new javax.swing.JTextField();
-        txtUnidad = new javax.swing.JTextField();
         bCancelar = new javax.swing.JButton();
         bGuardar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
         bActualizar = new javax.swing.JButton();
+        comboUnidad = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        bModificar.setText("Seleccionar");
-        bModificar.addActionListener(new java.awt.event.ActionListener() {
+        bSeleccionar.setText("Seleccionar");
+        bSeleccionar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bModificarActionPerformed(evt);
+                bSeleccionarActionPerformed(evt);
             }
         });
 
@@ -121,6 +123,8 @@ public class admin_gestionar_producto extends javax.swing.JFrame {
             }
         });
 
+        comboUnidad.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Kg", "Gal" }));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -147,14 +151,14 @@ public class admin_gestionar_producto extends javax.swing.JFrame {
                                     .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(92, 92, 92)
-                                .addComponent(bModificar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(bSeleccionar, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(93, 93, 93)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel8)
-                            .addComponent(txtPrecioC, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPrecioC, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE)
                             .addComponent(jLabel4)
-                            .addComponent(txtUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(bActualizar)))
+                            .addComponent(bActualizar)
+                            .addComponent(comboUnidad, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(182, 182, 182)
                         .addComponent(bCancelar)
@@ -182,7 +186,7 @@ public class admin_gestionar_producto extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(comboUnidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel5)
                         .addGap(6, 6, 6)
@@ -204,7 +208,7 @@ public class admin_gestionar_producto extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtNITP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(bActualizar)
-                    .addComponent(bModificar))
+                    .addComponent(bSeleccionar))
                 .addGap(117, 117, 117)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bCancelar)
@@ -231,7 +235,7 @@ public class admin_gestionar_producto extends javax.swing.JFrame {
             
             c.setProdNombre(txtNombre.getText());
             c.setProdDescripcion(txtDescripcion.getText());
-            c.setProdUnidadMedida(txtUnidad.getText());
+            c.setProdUnidadMedida((String) comboUnidad.getSelectedItem());
             c.setProdCantidad(Integer.parseInt(txtCantidad.getText()));
             c.setProdPrecioVenta(Integer.parseInt(txtPrecioV.getText()));
             c.setProdPrecioComprado(Integer.parseInt(txtPrecioC.getText()));
@@ -251,19 +255,19 @@ public class admin_gestionar_producto extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bGuardarActionPerformed
 
-    private void bModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bModificarActionPerformed
+    private void bSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bSeleccionarActionPerformed
         txtNombre.setText(tabla.getValueAt(tabla.getSelectedRow(), 1).toString());
         txtDescripcion.setText(tabla.getValueAt(tabla.getSelectedRow(), 2).toString());
-        txtUnidad.setText(tabla.getValueAt(tabla.getSelectedRow(), 3).toString());
+        comboUnidad.setSelectedItem(tabla.getValueAt(tabla.getSelectedRow(), 3).toString());
         txtCantidad.setText(tabla.getValueAt(tabla.getSelectedRow(), 4).toString());
         txtPrecioC.setText(tabla.getValueAt(tabla.getSelectedRow(), 5).toString());
         txtPrecioV.setText(tabla.getValueAt(tabla.getSelectedRow(), 6).toString());
-       // txtNITP.setText(tabla.getValueAt(tabla.getSelectedRow(), 7).toString());  
+        txtNITP.setText(modelo.getValueAt(tabla.getSelectedRow(), 7).toString());  
         
        //Productos produc = new Productos();
        //produc.se
-       cEdit = (Productos) tabla.getValueAt(tabla.getSelectedRow(), 0); 
-    }//GEN-LAST:event_bModificarActionPerformed
+       cEdit = cProductos.findProductos((Integer) modelo.getValueAt(tabla.getSelectedRow(), 0));
+    }//GEN-LAST:event_bSeleccionarActionPerformed
 
     private void bActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bActualizarActionPerformed
         try{
@@ -272,6 +276,7 @@ public class admin_gestionar_producto extends javax.swing.JFrame {
         cEdit.setProdCantidad(Integer.parseInt(txtCantidad.getText()));
         cEdit.setProdPrecioComprado(Integer.parseInt(txtPrecioC.getText()));
         cEdit.setProdPrecioVenta(Integer.parseInt(txtPrecioV.getText()));
+        cEdit.setProNIT(cProveedores.findProveedores(txtNITP.getText()));
         
         cProductos.edit(cEdit);
         System.out.println("Se actualizo");
@@ -330,14 +335,14 @@ public class admin_gestionar_producto extends javax.swing.JFrame {
             
             for (int i=0; i< listP.size(); i++){
                 modelo.addRow(o);
-                modelo.setValueAt(listP.get(i), i, 0);
+                modelo.setValueAt(listP.get(i).getProdCodigo(), i, 0);
                 modelo.setValueAt(listP.get(i).getProdNombre(), i, 1);
                 modelo.setValueAt(listP.get(i).getProdDescripcion(), i, 2);
                 modelo.setValueAt(listP.get(i).getProdUnidadMedida(), i, 3);
                 modelo.setValueAt(listP.get(i).getProdCantidad(), i, 4);
                 modelo.setValueAt(listP.get(i).getProdPrecioComprado(), i, 5);
                 modelo.setValueAt(listP.get(i).getProdPrecioVenta(), i, 6);
-                modelo.setValueAt(listP.get(i).getProNIT(), i, 7);
+                modelo.setValueAt(listP.get(i).getProNIT().getProNIT(), i, 7);
                 
             }                                            
         }catch(Exception e){
@@ -385,7 +390,8 @@ public class admin_gestionar_producto extends javax.swing.JFrame {
     private javax.swing.JButton bActualizar;
     private javax.swing.JButton bCancelar;
     private javax.swing.JButton bGuardar;
-    private javax.swing.JButton bModificar;
+    private javax.swing.JButton bSeleccionar;
+    private javax.swing.JComboBox<String> comboUnidad;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -401,6 +407,5 @@ public class admin_gestionar_producto extends javax.swing.JFrame {
     private javax.swing.JTextField txtNombre;
     private javax.swing.JTextField txtPrecioC;
     private javax.swing.JTextField txtPrecioV;
-    private javax.swing.JTextField txtUnidad;
     // End of variables declaration//GEN-END:variables
 }

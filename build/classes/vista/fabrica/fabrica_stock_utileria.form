@@ -39,7 +39,7 @@
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Component id="txtAgregar" min="-2" pref="206" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="76" max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" pref="114" max="-2" attributes="0"/>
+                      <Component id="bAgregar" min="-2" pref="114" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -52,7 +52,7 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="bInicio2" alignment="3" min="-2" pref="57" max="-2" attributes="0"/>
                   <Component id="txtAgregar" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="bAgregar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -99,12 +99,12 @@
     </Container>
     <Component class="javax.swing.JTextField" name="txtAgregar">
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="bAgregar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Agregar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bAgregarActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="bInicio2">

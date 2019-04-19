@@ -146,12 +146,12 @@ public class fabrica_stock_materiasPrimas extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bInicio2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(bAgregar)
-                        .addComponent(jLabel1)))
+                        .addComponent(jLabel1))
+                    .addComponent(bInicio2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -176,16 +176,12 @@ public class fabrica_stock_materiasPrimas extends javax.swing.JFrame {
     }//GEN-LAST:event_txtCantidadActionPerformed
 
     private void bAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAgregarActionPerformed
-        try{
-            List<Materiasprimas> listP = cMateriasprimas.findMateriasprimasEntities();
-                cEdit = (Materiasprimas) tabla.getValueAt(tabla.getSelectedRow(), 0);
-                int numero = tabla.getSelectedRow();
-                int cantidadS = (int) modelo.getValueAt(numero, 4);
+        try {
+            cEdit = cMateriasprimas.findMateriasprimas((Integer) modelo.getValueAt(tabla.getSelectedRow(), 0));
+            int numero = tabla.getSelectedRow();
+            int cantidadS = (int) modelo.getValueAt(numero, 4);
 
-                cEdit.setMatCatidad(cantidadS + (Integer.parseInt(txtCantidad.getText())));
-
-            
-
+            cEdit.setMatCatidad(cantidadS + (Integer.parseInt(txtCantidad.getText())));
 
             cMateriasprimas.edit(cEdit);
             System.out.println("Se actualizo");
@@ -273,13 +269,13 @@ public class fabrica_stock_materiasPrimas extends javax.swing.JFrame {
             
             for (int i=0; i< listP.size(); i++){
                 modelo.addRow(o);
-                modelo.setValueAt(listP.get(i), i, 0);
+                modelo.setValueAt(listP.get(i).getMatCodigo(), i, 0);
                 modelo.setValueAt(listP.get(i).getMatNombre(), i, 1);
                 modelo.setValueAt(listP.get(i).getMatDescripcion(), i, 2);
                 modelo.setValueAt(listP.get(i).getMatUnidadMedida(), i, 3);
                 modelo.setValueAt(listP.get(i).getMatCatidad(), i, 4);
                 modelo.setValueAt(listP.get(i).getMatPrecioComprado(), i, 5);
-                modelo.setValueAt(listP.get(i).getProNIT(), i, 6);
+                modelo.setValueAt(listP.get(i).getProNIT().getProNIT(), i, 6);
                 
             }                                            
         }catch(Exception e){
