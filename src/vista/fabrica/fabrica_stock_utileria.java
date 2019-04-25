@@ -5,6 +5,7 @@
  */
 package vista.fabrica;
 
+import java.awt.Dimension;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -25,6 +26,7 @@ public class fabrica_stock_utileria extends javax.swing.JFrame {
      */
     public fabrica_stock_utileria() {
         initComponents();
+        this.setMinimumSize(new Dimension(1420, 950));
         this.setLocationRelativeTo(null);
         CrearModelo();
         Cargar_Informacion();
@@ -43,14 +45,16 @@ public class fabrica_stock_utileria extends javax.swing.JFrame {
         tabla = new javax.swing.JTable();
         txtAgregar = new javax.swing.JTextField();
         bAgregar = new javax.swing.JButton();
-        bInicio2 = new javax.swing.JButton();
+        bInicio = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        bStockF = new javax.swing.JButton();
         bStockM = new javax.swing.JButton();
+        bStockF = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jButton4 = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
 
         tabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -65,99 +69,77 @@ public class fabrica_stock_utileria extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabla);
 
-        bAgregar.setText("Agregar");
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(140, 110, 1210, 740);
+        getContentPane().add(txtAgregar);
+        txtAgregar.setBounds(930, 40, 206, 30);
+
+        bAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bAgregar.png"))); // NOI18N
         bAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bAgregarActionPerformed(evt);
             }
         });
+        getContentPane().add(bAgregar);
+        bAgregar.setBounds(1170, 30, 190, 50);
 
-        bInicio2.setText("Inicio");
-        bInicio2.addActionListener(new java.awt.event.ActionListener() {
+        bInicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bInicio.png"))); // NOI18N
+        bInicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bInicio2ActionPerformed(evt);
+                bInicioActionPerformed(evt);
             }
         });
+        getContentPane().add(bInicio);
+        bInicio.setBounds(0, 0, 80, 80);
 
-        jButton2.setText("Pedidos");
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bPedidos.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton2);
+        jButton2.setBounds(0, 130, 80, 80);
 
-        bStockF.setText("Stock - F");
-        bStockF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bStockFActionPerformed(evt);
-            }
-        });
-
-        bStockM.setText("Stock - M");
+        bStockM.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bStockM.png"))); // NOI18N
         bStockM.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bStockMActionPerformed(evt);
             }
         });
+        getContentPane().add(bStockM);
+        bStockM.setBounds(0, 250, 80, 80);
 
-        jButton3.setText("Stock - U");
+        bStockF.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bStockF.png"))); // NOI18N
+        bStockF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bStockFActionPerformed(evt);
+            }
+        });
+        getContentPane().add(bStockF);
+        bStockF.setBounds(0, 370, 80, 80);
+
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bStockU.png"))); // NOI18N
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton3);
+        jButton3.setBounds(0, 490, 80, 80);
 
-        jButton5.setText("Observaciones");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/Admin_bObservaciones.png"))); // NOI18N
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                jButton4ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton4);
+        jButton4.setBounds(0, 610, 80, 80);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(bInicio2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bStockF, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(bStockM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 836, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(txtAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(76, 76, 76)
-                        .addComponent(bAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bInicio2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bAgregar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bStockF, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(bStockM, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE)))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/Fabrica_SU.png"))); // NOI18N
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(0, 0, 1400, 900);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -178,11 +160,11 @@ public class fabrica_stock_utileria extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bAgregarActionPerformed
 
-    private void bInicio2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bInicio2ActionPerformed
+    private void bInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bInicioActionPerformed
         Inicio ventana = new Inicio();
         ventana.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_bInicio2ActionPerformed
+    }//GEN-LAST:event_bInicioActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         fabrica_pedidos ventana = new fabrica_pedidos();
@@ -190,17 +172,17 @@ public class fabrica_stock_utileria extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void bStockFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bStockFActionPerformed
-        fabrica_stock_fabrica ventana = new fabrica_stock_fabrica();
-        ventana.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_bStockFActionPerformed
-
     private void bStockMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bStockMActionPerformed
         fabrica_stock_materiasPrimas ventana = new fabrica_stock_materiasPrimas();
         ventana.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_bStockMActionPerformed
+
+    private void bStockFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bStockFActionPerformed
+        fabrica_stock_fabrica ventana = new fabrica_stock_fabrica();
+        ventana.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_bStockFActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         fabrica_stock_utileria ventana = new fabrica_stock_utileria();
@@ -208,11 +190,11 @@ public class fabrica_stock_utileria extends javax.swing.JFrame {
         this.setVisible(false);
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         fabrica_Observaciones ventana = new fabrica_Observaciones();
         ventana.setVisible(true);
         this.setVisible(false);
-    }//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     DefaultTableModel modelo;
     private void CrearModelo() {
@@ -319,12 +301,13 @@ public class fabrica_stock_utileria extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bAgregar;
-    private javax.swing.JButton bInicio2;
+    private javax.swing.JButton bInicio;
     private javax.swing.JButton bStockF;
     private javax.swing.JButton bStockM;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabla;
     private javax.swing.JTextField txtAgregar;

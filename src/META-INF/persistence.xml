@@ -10,6 +10,7 @@
     <class>modelo.Productos</class>
     <class>modelo.Detallesorden</class>
     <class>modelo.Materiasprimas</class>
+    <class>modelo.Cuentas</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/acabadosdonjorge"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

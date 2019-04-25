@@ -5,6 +5,7 @@
  */
 package vista.admin;
 
+import java.awt.Dimension;
 import vista.Inicio;
 
 /**
@@ -18,6 +19,7 @@ public class admin_gestionar extends javax.swing.JFrame {
      */
     public admin_gestionar() {
         initComponents();
+        this.setMinimumSize(new Dimension(1420, 950));
         this.setLocationRelativeTo(null);
        // this.setResizable(false);
        // this.setTitle("Gestionar");
@@ -38,129 +40,90 @@ public class admin_gestionar extends javax.swing.JFrame {
         bProveedor = new javax.swing.JButton();
         bEmpleado = new javax.swing.JButton();
         bProducto = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
         bMateriaP = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        getContentPane().setLayout(null);
 
-        bInicio.setText("Inicio");
+        bInicio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bInicio.png"))); // NOI18N
         bInicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bInicioActionPerformed(evt);
             }
         });
+        getContentPane().add(bInicio);
+        bInicio.setBounds(1, 0, 84, 84);
 
-        jButton2.setText("Gestionar");
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/Admin_bGestionar.png"))); // NOI18N
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton2);
+        jButton2.setBounds(1, 150, 84, 84);
 
-        bCliente.setText("Cliente");
+        bCliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/Admin_Gestionar_bClientes.png"))); // NOI18N
         bCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bClienteActionPerformed(evt);
             }
         });
+        getContentPane().add(bCliente);
+        bCliente.setBounds(411, 560, 443, 121);
 
-        bProveedor.setText("Proveedor");
+        bProveedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/Admin_Gestionar_bProveedores.png"))); // NOI18N
         bProveedor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bProveedorActionPerformed(evt);
             }
         });
+        getContentPane().add(bProveedor);
+        bProveedor.setBounds(621, 430, 503, 120);
 
-        bEmpleado.setText("Empleado");
+        bEmpleado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/Admin_Gestionar_bEmpleados.png"))); // NOI18N
         bEmpleado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bEmpleadoActionPerformed(evt);
             }
         });
+        getContentPane().add(bEmpleado);
+        bEmpleado.setBounds(641, 690, 443, 123);
 
-        bProducto.setText("Producto");
+        bProducto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/Admin_Gestionar_bProductos.png"))); // NOI18N
         bProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bProductoActionPerformed(evt);
             }
         });
+        getContentPane().add(bProducto);
+        bProducto.setBounds(871, 560, 443, 120);
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
-        jLabel1.setText("Gestionar: ");
-
-        bMateriaP.setText("Materia P.");
+        bMateriaP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/Admin_Gestionar_bMPrimas.png"))); // NOI18N
         bMateriaP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bMateriaPActionPerformed(evt);
             }
         });
+        getContentPane().add(bMateriaP);
+        bMateriaP.setBounds(161, 430, 443, 120);
 
-        jButton1.setText("Observaciones");
+        jButton1.setBackground(new java.awt.Color(58, 58, 128));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/Admin_bObservaciones.png"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(1, 300, 84, 84);
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/barra.png"))); // NOI18N
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(650, 650, 650)
-                .addComponent(bEmpleado))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(410, 410, 410)
-                .addComponent(bProducto))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(570, 570, 570)
-                .addComponent(bMateriaP))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(430, 430, 430)
-                .addComponent(jLabel1))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(340, 340, 340)
-                .addComponent(bCliente))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(490, 490, 490)
-                .addComponent(bProveedor))
-            .addComponent(bInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 990, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63)
-                .addComponent(bEmpleado)
-                .addGap(65, 65, 65)
-                .addComponent(bProducto))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(270, 270, 270)
-                .addComponent(bMateriaP))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(jLabel1))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(180, 180, 180)
-                .addComponent(bCliente))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(180, 180, 180)
-                .addComponent(bProveedor))
-            .addComponent(bInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(120, 120, 120)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/Admin_Gestionar.png"))); // NOI18N
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(0, 0, 1400, 900);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -255,7 +218,6 @@ public class admin_gestionar extends javax.swing.JFrame {
     private javax.swing.JButton bProveedor;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     // End of variables declaration//GEN-END:variables
 }

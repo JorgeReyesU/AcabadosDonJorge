@@ -41,6 +41,9 @@ import javax.xml.bind.annotation.XmlTransient;
     , @NamedQuery(name = "Empleados.findByEmpFechaDespido", query = "SELECT e FROM Empleados e WHERE e.empFechaDespido = :empFechaDespido")})
 public class Empleados implements Serializable {
 
+    @OneToMany(mappedBy = "empDni")
+    private List<Cuentas> cuentasList;
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
@@ -179,6 +182,15 @@ public class Empleados implements Serializable {
     @Override
     public String toString() {
         return "modelo.Empleados[ empDni=" + empDni + " ]";
+    }
+
+    @XmlTransient
+    public List<Cuentas> getCuentasList() {
+        return cuentasList;
+    }
+
+    public void setCuentasList(List<Cuentas> cuentasList) {
+        this.cuentasList = cuentasList;
     }
     
 }

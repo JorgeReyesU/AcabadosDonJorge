@@ -5,6 +5,7 @@
  */
 package vista.venta;
 
+import java.awt.Dimension;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -39,6 +40,7 @@ public class venta_pago extends javax.swing.JFrame {
      */
     public venta_pago() {
         initComponents();
+        this.setMinimumSize(new Dimension(1000, 680));
         this.setLocationRelativeTo(null);
         
       //  venta_facturacion ventana = new venta_facturacion();
@@ -54,123 +56,60 @@ public class venta_pago extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         txtTelefono = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
         txtDireccion = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        txtFD = new javax.swing.JTextField();
-        jLabel5 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         comboTP = new javax.swing.JComboBox<>();
-        jLabel6 = new javax.swing.JLabel();
-        txtFP = new javax.swing.JTextField();
         bCancelar = new javax.swing.JButton();
         bEjecutar = new javax.swing.JButton();
+        dateFD = new com.toedter.calendar.JDateChooser();
+        dateFP = new com.toedter.calendar.JDateChooser();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
+        getContentPane().add(txtTelefono);
+        txtTelefono.setBounds(410, 120, 260, 30);
+        getContentPane().add(txtDireccion);
+        txtDireccion.setBounds(30, 120, 320, 30);
 
-        jLabel1.setText("Informacion de envio: ");
-
-        jLabel2.setText("Telefono: ");
-
-        jLabel3.setText("Direccion:");
-
-        jLabel4.setText("Fecha de entrega:");
-
-        jLabel5.setText("Informacion de pago:");
-
+        jComboBox1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jComboBox1.setForeground(new java.awt.Color(58, 58, 128));
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Efectivo", "Bancario", " " }));
+        getContentPane().add(jComboBox1);
+        jComboBox1.setBounds(30, 370, 160, 40);
 
+        comboTP.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        comboTP.setForeground(new java.awt.Color(58, 58, 128));
         comboTP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Contado", "Credito" }));
+        getContentPane().add(comboTP);
+        comboTP.setBounds(30, 430, 160, 40);
 
-        jLabel6.setText("Fecha de pago:");
-
-        bCancelar.setText("Cancelar");
+        bCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bCancelar.png"))); // NOI18N
         bCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bCancelarActionPerformed(evt);
             }
         });
+        getContentPane().add(bCancelar);
+        bCancelar.setBounds(240, 570, 200, 50);
 
-        bEjecutar.setText("Ejecutar");
+        bEjecutar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/bEjecutar.png"))); // NOI18N
         bEjecutar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bEjecutarActionPerformed(evt);
             }
         });
+        getContentPane().add(bEjecutar);
+        bEjecutar.setBounds(510, 570, 200, 50);
+        getContentPane().add(dateFD);
+        dateFD.setBounds(720, 120, 230, 30);
+        getContentPane().add(dateFP);
+        dateFP.setBounds(410, 370, 260, 30);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(comboTP, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(80, 80, 80)
-                        .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(txtFP)
-                                .addGap(342, 342, 342))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(bCancelar)
-                                .addGap(131, 131, 131)
-                                .addComponent(bEjecutar)
-                                .addGap(0, 0, Short.MAX_VALUE))))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
-                            .addComponent(jLabel2)
-                            .addComponent(txtTelefono))
-                        .addGap(97, 97, 97)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(149, 149, 149)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(txtFD, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtFD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(67, 67, 67)
-                .addComponent(jLabel5)
-                .addGap(35, 35, 35)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(comboTP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
-                    .addComponent(txtFP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(111, 111, 111)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(bCancelar)
-                    .addComponent(bEjecutar))
-                .addContainerGap(36, Short.MAX_VALUE))
-        );
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/Venta_Pago.png"))); // NOI18N
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(0, 0, 1000, 650);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -186,12 +125,12 @@ public class venta_pago extends javax.swing.JFrame {
             Date date1=new SimpleDateFormat("dd/MM/yyyy").parse(fechaHoy); 
             c.setOrdFechaOrden(date1);
             
-            Date date2=new SimpleDateFormat("dd/MM/yyyy").parse(txtFD.getText()); 
-            c.setOrdFechaDespacho(date2);
+          //  Date date2=new SimpleDateFormat("dd/MM/yyyy").parse(txtFD.getText()); 
+            c.setOrdFechaDespacho(dateFD.getDate());
             
             if(comboTP.getSelectedItem() == "Credito"){
-                Date date3=new SimpleDateFormat("dd/MM/yyyy").parse(txtFP.getText()); 
-                c.setOrdFechaPago(date3);
+          //      Date date3=new SimpleDateFormat("dd/MM/yyyy").parse(txtFP.getText()); 
+                c.setOrdFechaPago(dateFP.getDate());
             } else {
                 Date date3=new SimpleDateFormat("dd/MM/yyyy").parse(fechaHoy); 
                 c.setOrdFechaPago(date3);
@@ -265,16 +204,11 @@ public class venta_pago extends javax.swing.JFrame {
     private javax.swing.JButton bCancelar;
     private javax.swing.JButton bEjecutar;
     private javax.swing.JComboBox<String> comboTP;
+    private com.toedter.calendar.JDateChooser dateFD;
+    private com.toedter.calendar.JDateChooser dateFP;
     private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JTextField txtDireccion;
-    private javax.swing.JTextField txtFD;
-    private javax.swing.JTextField txtFP;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }

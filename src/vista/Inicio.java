@@ -5,10 +5,15 @@
  */
 package vista;
 
+import java.util.List;
 import vista.fabrica.fabrica_pedidos;
 import vista.admin.admin_gestionar;
 import vista.venta.venta_facturacion;
 import javax.swing.JOptionPane;
+import modelo.Cuentas;
+import modelo.Empleados;
+import persistencia.CuentasJpaController;
+import persistencia.EmpleadosJpaController;
 import vista.fabrica.fabrica_stock_fabrica;
 
 /**
@@ -16,7 +21,11 @@ import vista.fabrica.fabrica_stock_fabrica;
  * @author Kings
  */
 public class Inicio extends javax.swing.JFrame {
-
+    
+    CuentasJpaController cCuentas = new CuentasJpaController();
+    EmpleadosJpaController cEmpleados = new EmpleadosJpaController();
+    Cuentas cuenta1;
+    
     /**
      * Creates new form Inicio
      */
@@ -35,133 +44,111 @@ public class Inicio extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        boton_admin = new javax.swing.JButton();
-        boton_venta = new javax.swing.JButton();
-        boton_fabrica = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txtEmp = new javax.swing.JTextField();
+        bEntrar = new javax.swing.JButton();
+        txtPass = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
 
-        boton_admin.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        boton_admin.setText("Admin");
-        boton_admin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boton_adminActionPerformed(evt);
-            }
-        });
-
-        boton_venta.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        boton_venta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/B_Inicio.png"))); // NOI18N
-        boton_venta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boton_ventaActionPerformed(evt);
-            }
-        });
-
-        boton_fabrica.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
-        boton_fabrica.setText("Fabrica");
-        boton_fabrica.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                boton_fabricaActionPerformed(evt);
-            }
-        });
-
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/Inicio.png"))); // NOI18N
 
-        jLabel2.setText("User:");
+        txtEmp.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
 
-        jLabel3.setText("Password:");
+        bEntrar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/vista/img/Entrar.png"))); // NOI18N
+        bEntrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bEntrarActionPerformed(evt);
+            }
+        });
 
-        jTextField1.setText("jTextField1");
-
-        jPasswordField1.setText("jPasswordField1");
+        txtPass.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(114, 114, 114)
-                        .addComponent(jLabel1))
-                    .addComponent(jLabel4))
-                .addGap(102, 102, 102)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel2)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel3)
-                        .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(boton_admin, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(10, 10, 10)
-                                    .addComponent(boton_fabrica, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(boton_venta, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(95, 95, 95))))
+                .addGap(114, 114, 114)
+                .addComponent(jLabel1))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(530, 530, 530)
+                .addComponent(bEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 440, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(510, 510, 510)
+                .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(510, 510, 510)
+                .addComponent(txtEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jLabel4)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(727, 727, 727)
-                        .addComponent(jLabel1))
-                    .addComponent(jLabel4)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addComponent(boton_venta, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(68, 68, 68)
-                        .addComponent(boton_admin, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(boton_fabrica, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(136, 136, 136)
-                        .addComponent(jLabel2)
-                        .addGap(2, 2, 2)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(7, 7, 7)
-                        .addComponent(jLabel3)
-                        .addGap(13, 13, 13)
-                        .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(36, 36, 36))
+                .addGap(727, 727, 727)
+                .addComponent(jLabel1)
+                .addGap(23, 23, 23)
+                .addComponent(bEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(670, 670, 670)
+                .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(550, 550, 550)
+                .addComponent(txtEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jLabel4)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void boton_adminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_adminActionPerformed
-        String pass = "admin123";
-        String passinput;
-        
-        passinput = JOptionPane.showInputDialog("Ingrese la cntraseña: ");
-        if(pass.equals(passinput)){
-            admin_gestionar ventana_admin_gestionar = new admin_gestionar();
-            ventana_admin_gestionar.setVisible(true);
-            this.setVisible(false);
-        }else{
-            JOptionPane.showMessageDialog(null, "La contraseña es incorrecta");
+    private void bEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEntrarActionPerformed
+        List<Cuentas> listC = cCuentas.findCuentasEntities();
+    try{
+        int comprobacionUser = 0;
+        System.out.println(listC.size());
+        for (int i = 0; i < listC.size(); i++) {
+            if(listC.get(i).getEmpDni().getEmpDni().equals(cEmpleados.findEmpleados(Integer.parseInt(txtEmp.getText())).getEmpDni())){
+                cuenta1 = listC.get(i);
+                comprobacionUser = 1;
+            }
+            if(i == listC.size() && comprobacionUser == 0){
+                JOptionPane.showMessageDialog(null, "No existe el usuario");
+            }
         }
-    }//GEN-LAST:event_boton_adminActionPerformed
+        if (comprobacionUser == 1) {
+            if (cuenta1.getCuentaPassword().equals(String.valueOf(txtPass.getPassword()))) {
+                String tipoEmp = cEmpleados.findEmpleados(cuenta1.getEmpDni().getEmpDni()).getEmpCargo();
+                switch (tipoEmp) {
+                    case "Admin":
+                        vista.admin.admin_gestionar ventana = new vista.admin.admin_gestionar();
+                        ventana.setVisible(true);
+                        this.setVisible(false);
+                        break;
 
-    private void boton_ventaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_ventaActionPerformed
-         venta_facturacion ventana = new venta_facturacion();
-         ventana.setVisible(true);
-         this.setVisible(false);
-    }//GEN-LAST:event_boton_ventaActionPerformed
+                    case "Fabrica":
+                        vista.fabrica.fabrica_pedidos ventana1 = new vista.fabrica.fabrica_pedidos();
+                        ventana1.setVisible(true);
+                        this.setVisible(false);
+                        break;
 
-    private void boton_fabricaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boton_fabricaActionPerformed
-         fabrica_pedidos ventana = new fabrica_pedidos();
-         ventana.setVisible(true);
-         this.setVisible(false);
-    }//GEN-LAST:event_boton_fabricaActionPerformed
+                    case "Venta":
+                        vista.venta.venta_facturacion ventana2 = new vista.venta.venta_facturacion();
+                        ventana2.setVisible(true);
+                        this.setVisible(false);
+                        break;
+
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Password incorrecta");
+            }
+        }
+    } catch (Exception e ){
+        JOptionPane.showMessageDialog(null, "No existe el usuario.");
+    }
+        
+        
+    }//GEN-LAST:event_bEntrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -199,14 +186,10 @@ public class Inicio extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton boton_admin;
-    private javax.swing.JButton boton_fabrica;
-    private javax.swing.JButton boton_venta;
+    private javax.swing.JButton bEntrar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtEmp;
+    private javax.swing.JPasswordField txtPass;
     // End of variables declaration//GEN-END:variables
 }
